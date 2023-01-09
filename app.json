@@ -1,13 +1,13 @@
 {
   "expo": {
     "name": "Arvenses",
-    "slug": "Arvenses",
+    "slug": "arvenses",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./src/assets/images/app_icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./src/assets/images/img_inicio.jpg",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -22,12 +22,18 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./src/assets/images/app_icon.png",
         "backgroundColor": "#FFFFFF"
       }
     },
     "web": {
-      "favicon": "./assets/favicon.png"
-    }
+      "favicon": "./src/assets/images/app_icon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "d74d4492-ef3e-47b2-a6ba-401776dbd900"
+      }
+    },
+    "owner": "vriur04"
   }
 }
