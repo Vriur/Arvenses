@@ -1,4 +1,3 @@
-
 import * as React from 'react';
 import { MenuProvider } from 'react-native-popup-menu';
 import { SafeAreaProvider } from 'react-native-safe-area-context';

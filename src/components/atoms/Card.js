@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import AppIcon from './../../assets/images/prueba.jpeg';
+import { openDatabase } from '../../../database-service';
+import { Buffer } from 'buffer';
 
 const styles = StyleSheet.create({
     container: {
@@ -9,7 +10,7 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         alignItems: 'center',
         justifyContent: 'flex-end',
-        width: '46%',
+        width: '96%',
         height: 200,
         shadowColor: '#000',
         shadowOffset: {
@@ -45,30 +46,50 @@ const styles = StyleSheet.create({
     },
 
     name: {
-        marginLeft: '10%',
+        marginLeft: '5%',
+        marginRight: '5%',
         color: '#174c72',
         fontSize: 12,
     },
 
     scientificName: {
-        marginLeft: '10%',
+        marginLeft: '5%',
+        marginRight: '5%',
         color: '#41ade7',
         fontSize: 10,
-        fontStyle: 'italic'
+        fontStyle: 'italic',
     }
 });
 
 const Card = (props) => {
-    const cardData = props.cardData;
+    let cardData = props.cardData;
+    const [imageURL, setImageUrl] = useState("");
+
+    async function fetchData(){
+        let database = await openDatabase();
+        database.transaction((query) => {
+            query.executeSql("SELECT hex(image) as img FROM specie WHERE _id = ? ", [cardData.id],
+                (query, resultSet) => {
+                    let imageInHex = resultSet.rows._array[0].img;
+                    const imageBuffer = Buffer.from(imageInHex, 'hex');
+                    let imageInBase64 = imageBuffer.toString('base64');
+                    setImageUrl("data:image/png;base64," + imageInBase64);
+                },
+                (query, error) => {console.log(error + " " + cardData.id)}
+            );
+        });
+    } 
+
+    fetchData();
 
     return(
         <TouchableOpacity style = {styles.container} onPress={() => props.navigation.navigate('ResultMenu')}>
             <View style = {styles.imageContainer}>
-                <Image source = {AppIcon} style = {styles.image} />
+                <Image source = {{uri: imageURL  ? imageURL : null}} style = {styles.image} />
             </View>
             <View style = {styles.textData}>
-                <Text style = {styles.name}>{cardData.name}</Text>
-                <Text style = {styles.scientificName}>{cardData.scientificName}</Text>
+                <Text style = {styles.name} numberOfLines={1} ellipsizeMode='tail' >{cardData.name}</Text>
+                <Text style = {styles.scientificName} numberOfLines={2} ellipsizeMode='tail' >{cardData.scientificName}</Text>
             </View>
         </TouchableOpacity>
     );
