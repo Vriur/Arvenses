@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Image, ImageBackground, Modal, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import BackgroundImg from './../assets/images/img_inicio.jpg';
-import FabioIcon from './../assets/images/fabio_icon.png';
-import UCRIcon from './../assets/images/ucr_icon.png';
+import BackgroundImg from './../assets/icons/img_inicio.jpg';
+import FabioIcon from './../assets/icons/fabio_icon.png';
+import UCRIcon from './../assets/icons/ucr_icon.png';
 
 const styles = StyleSheet.create({
     container: {

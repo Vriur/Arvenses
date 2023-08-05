@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
 import GalerySearch from '../screens/GalerySearch'
 import TaxonomySearch from '../screens/TaxonomySearch'
-import QuotedHandlingSearch from '../screens/QuotedHandlingSearch'
+import AditionalInformation from '../screens/AditionalInformation'
 
 const styles = StyleSheet.create({
     headerShown: false, 
@@ -29,7 +29,7 @@ const SearchTab = ({navigation}) => {
         <Tab.Navigator screenOptions = {styles} >
             <Tab.Screen name = "Galería" component = {GalerySearch} navigation = {navigation} />
             <Tab.Screen name = "Taxonomía" component = {TaxonomySearch} />
-            <Tab.Screen name = "Manejo Citado" component = {QuotedHandlingSearch} />
+            <Tab.Screen name = "Información Adicional" component = {AditionalInformation} />
         </Tab.Navigator>
     );
 } 

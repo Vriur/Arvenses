@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import CardList from '../components/molecules/CardList';
 import { openDatabase } from '../../database-service';
+import CardList from '../components/molecules/CardList';
 
 const styles = StyleSheet.create({
     container: {
@@ -20,6 +20,7 @@ const GalerySearch = ({navigation}) => {
                     (query, resultSet) => {
                         let results = [];
                         resultSet.rows._array.forEach(item => {
+                            console.log(item);
                             let result = {id: item._id, name: item.common_name, scientificName: item.scientific_name};
                             results.push(result);
                         });

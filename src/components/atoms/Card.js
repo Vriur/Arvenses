@@ -1,7 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { openDatabase } from '../../../database-service';
-import { Buffer } from 'buffer';
 
 const styles = StyleSheet.create({
     container: {
@@ -63,9 +61,8 @@ const styles = StyleSheet.create({
 
 const Card = (props) => {
     let cardData = props.cardData;
-    const [imageURL, setImageUrl] = useState("");
 
-    async function fetchData(){
+    /*async function fetchData(){
         let database = await openDatabase();
         database.transaction((query) => {
             query.executeSql("SELECT hex(image) as img FROM specie WHERE _id = ? ", [cardData.id],
@@ -80,12 +77,12 @@ const Card = (props) => {
         });
     } 
 
-    fetchData();
+    fetchData();*/
 
     return(
-        <TouchableOpacity style = {styles.container} onPress={() => props.navigation.navigate('ResultMenu')}>
+        <TouchableOpacity style = {styles.container} onPress={() => props.navigation.navigate('ResultMenu', {scientificName: cardData.scientificName})}>
             <View style = {styles.imageContainer}>
-                <Image source = {{uri: imageURL  ? imageURL : null}} style = {styles.image} />
+                <Image source = {require('./../../assets/images/0/0_01.jpg')} style = {styles.image} />
             </View>
             <View style = {styles.textData}>
                 <Text style = {styles.name} numberOfLines={1} ellipsizeMode='tail' >{cardData.name}</Text>

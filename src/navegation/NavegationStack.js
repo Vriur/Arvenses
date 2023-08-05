@@ -5,7 +5,6 @@ import SearchMenu from './../screens/SearchMenu'
 import AboutUs from './../screens/AboutUs'
 import Help from './../screens/Help'
 import ResultMenu from '../screens/ResultMenu';
-import Definitions from '../screens/Definitions';
 
 const Stack = createNativeStackNavigator();
 
@@ -17,7 +16,6 @@ const MyStack = () => {
       <Stack.Screen name = 'AboutUs' component = {AboutUs} />
       <Stack.Screen name = 'Help' component = {Help} />
       <Stack.Screen name = 'ResultMenu' component = {ResultMenu} />
-      <Stack.Screen name = 'Definitions' component = {Definitions} />
     </Stack.Navigator>
   );
 };
