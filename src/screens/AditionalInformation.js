@@ -1,5 +1,6 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { ADITIONAL_INFORMATION } from '../../Constants';
 
 const styles = StyleSheet.create({
     container: {
@@ -26,12 +27,13 @@ const styles = StyleSheet.create({
 const AditionalInformation = ({navigation}) => {
     return(
         <View style = {styles.container}>
-            <TouchableOpacity style = {styles.button} onPress={() => console.log('Descargar Información Adicional')}>
-                <Text style = {styles.buttonText}>Descargar Información Adicional</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style = {styles.button} onPress={() => console.log('Descargar Referencias')}>
-                <Text style = {styles.buttonText}>Descargar Referencias</Text>
-            </TouchableOpacity>
+            <FlatList data = {ADITIONAL_INFORMATION.BUTTONS}
+                renderItem = {({item}) => 
+                    <TouchableOpacity style = {styles.button} onPress={() => console.log(item.DOWNLOADABLE_FILE)}>
+                        <Text style = {styles.buttonText}>{item.TEXT}</Text>
+                    </TouchableOpacity>
+                }
+            />
         </View>
     );
 } 

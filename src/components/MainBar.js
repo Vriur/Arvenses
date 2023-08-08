@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
 import { Menu, MenuOptions, MenuOption, MenuTrigger } from 'react-native-popup-menu';
 import AppIcon from './../assets/icons/app_icon.png';
+import { APP, MAIN_BAR } from '../../Constants';
 
 const styles = StyleSheet.create({
     icon: {
@@ -52,16 +53,16 @@ const MainBar = ({navigation, containerStyle}) => {
     return(
         <View style = {containerStyle}>
             <Image source = {AppIcon} style = {styles.icon} />
-            <Text style = {styles.text}>Pastarvenses</Text>
+            <Text style = {styles.text}>{APP.NAME}</Text>
 
             <Menu style = {styles.menu}>
                 <MenuTrigger customStyles = {triggerStyles}>
                     <FontAwesomeIcon icon = {faBars} size = {32} style = {{margin: '5%'}} />
                 </MenuTrigger>
                 <MenuOptions customStyles = {optionsStyles}>
-                    <MenuOption text = 'Info. de la app' onSelect = {() => navigation.navigate('Home')} />
-                    <MenuOption text = 'Sobre nosotros' onSelect = {() => navigation.navigate('AboutUs')} />
-                    <MenuOption text = 'Ayuda' onSelect = {() => navigation.navigate('Help')} />
+                    <MenuOption text = {MAIN_BAR.APP_INFO} onSelect = {() => navigation.navigate('Home')} />
+                    <MenuOption text = {MAIN_BAR.ABOUT_US} onSelect = {() => navigation.navigate('AboutUs')} />
+                    <MenuOption text = {MAIN_BAR.HELP} onSelect = {() => navigation.navigate('Help')} />
                 </MenuOptions>
             </Menu>
         </View>

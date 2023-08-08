@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { TAXONOMY_SEARCH_WARNING } from './../../Constants';
 
 const styles = StyleSheet.create({
     container: {
@@ -28,7 +29,7 @@ const TaxonomySearch = ({navigation}) => {
     return(
         <View style = {styles.container}>
             <View style = {styles.warning}>
-                <Text style = {styles.warningText}>¡Recuerde que cuando cambie de hoja ancha a hoja angosta debe limpiar las marcas!</Text>
+                <Text style = {styles.warningText}>{TAXONOMY_SEARCH_WARNING}</Text>
             </View>
             <View style = {styles.mainContent}></View>
         </View>

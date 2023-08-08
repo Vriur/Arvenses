@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
+import { RESULT_TAB } from './../../Constants';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faImages, faFileLines, faList, faBookBookmark, faHand } from '@fortawesome/free-solid-svg-icons'
@@ -25,8 +26,8 @@ const Tab = createBottomTabNavigator();
 const ResultTab = ({navigation}) => {
     return(
         <Tab.Navigator screenOptions = {styles} initialRouteName = 'Atributos' >
-            <Tab.Screen name = "Imágenes" component = {ResultImages} options = {{tabBarIcon:() => (<FontAwesomeIcon icon = {faImages} size = {28} style = {{color: 'white'}} />)}} />
-            <Tab.Screen name = "Atributos" component = {ResultAttributes} options = {{tabBarIcon:() => (<FontAwesomeIcon icon = {faList} size = {28} style = {{color: 'white'}} />)}} />
+            <Tab.Screen name = {RESULT_TAB.IMAGES_NAME} component = {ResultImages} options = {{tabBarIcon:() => (<FontAwesomeIcon icon = {faImages} size = {28} style = {{color: 'white'}} />)}} />
+            <Tab.Screen name = {RESULT_TAB.ATTRIBUTE_NAME} component = {ResultAttributes} options = {{tabBarIcon:() => (<FontAwesomeIcon icon = {faList} size = {28} style = {{color: 'white'}} />)}} />
         </Tab.Navigator>
     );
 } 

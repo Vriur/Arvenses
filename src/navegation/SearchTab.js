@@ -1,9 +1,10 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
-import GalerySearch from '../screens/GalerySearch'
-import TaxonomySearch from '../screens/TaxonomySearch'
-import AditionalInformation from '../screens/AditionalInformation'
+import { SEARCH_TAB } from './../../Constants';
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import GalerySearch from '../screens/GalerySearch';
+import TaxonomySearch from '../screens/TaxonomySearch';
+import AditionalInformation from '../screens/AditionalInformation';
 
 const styles = StyleSheet.create({
     headerShown: false, 
@@ -27,9 +28,9 @@ const Tab = createMaterialTopTabNavigator();
 const SearchTab = ({navigation}) => {
     return(
         <Tab.Navigator screenOptions = {styles} >
-            <Tab.Screen name = "Galería" component = {GalerySearch} navigation = {navigation} />
-            <Tab.Screen name = "Taxonomía" component = {TaxonomySearch} />
-            <Tab.Screen name = "Información Adicional" component = {AditionalInformation} />
+            <Tab.Screen name = {SEARCH_TAB.GALERY_NAME} component = {GalerySearch} navigation = {navigation} />
+            <Tab.Screen name = {SEARCH_TAB.TAXONOMY_NAME} component = {TaxonomySearch} />
+            <Tab.Screen name = {SEARCH_TAB.ADITIONAL_INFORMATION_NAME} component = {AditionalInformation} />
         </Tab.Navigator>
     );
 } 

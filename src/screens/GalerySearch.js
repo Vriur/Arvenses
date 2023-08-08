@@ -16,12 +16,11 @@ const GalerySearch = ({navigation}) => {
         async function fetchData(){
             let database = await openDatabase();
             database.transaction((query) => {
-                query.executeSql("SELECT _id, common_name, scientific_name FROM specie", [],
+                query.executeSql("SELECT _id, scientific_name FROM specie", [],
                     (query, resultSet) => {
                         let results = [];
                         resultSet.rows._array.forEach(item => {
-                            console.log(item);
-                            let result = {id: item._id, name: item.common_name, scientificName: item.scientific_name};
+                            let result = {id: item._id, scientificName: item.scientific_name};
                             results.push(result);
                         });
                         setData(results);

@@ -1,5 +1,6 @@
 import React from 'react';
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { ABOUT_US, APP } from '../../Constants';
 
 const styles = StyleSheet.create({
     container: {
@@ -53,23 +54,23 @@ const AboutUs = ({navigation}) => {
     return(
         <View style = {styles.container}>
             <View style = {styles.header}>
-                <Text style = {styles.headerText}>Pastarvenses</Text>
+                <Text style = {styles.headerText}>{APP.NAME}</Text>
             </View>
             <ScrollView style = {styles.scrollSection}>
-                <Text style = {styles.genericTitle}>Autores:</Text>
-                <Text style = {styles.genericText}>Mary Pamela Portuguez García, Renán Agüero Alvarado, Ana María Rodríguez Ruiz, Steven Brenes Prendas.</Text>
-                <Text style = {styles.genericTitle}>Programadores:</Text>
-                <Text style = {styles.genericText}>María Obregón Coto, Nathan González Herrera.</Text>
-                <Text style = {styles.genericTitle}>Diseñadoras Gráficas:</Text>
-                <Text style = {styles.genericText}>Evelyn Naranjo Madrigal (diseñadora gráfica de dibujos del glosario), Jasmin Ortega Gutiérrez.</Text>
-                <Text style = {styles.genericTitle}>Agradecimiento:</Text>
-                <Text style = {styles.genericText}>Franklin Herrera Murillo, Moisés Hernández Chaves, Silvia Rivas González, Carlos Fonseca Fonseca y a todos los productores que nos permitieron muestrear sus fincas.</Text>
-                <Text style = {styles.genericTitle}>Contacto:</Text>
-                <Text style = {styles.genericText}>Correo: arvenses.eeafbm@ucr.ac.cr\nTeléfono: 2511-7778.</Text>
-                <Text style = {[styles.genericTitle, {marginBottom: '5%'}]}>Proyecto ED-1816 Universidad de Costa Rica</Text>
+                <Text style = {styles.genericTitle}>{ABOUT_US.AUTHORS_TITLE}</Text>
+                <Text style = {styles.genericText}>{ABOUT_US.AUTHORS_TEXT}</Text>
+                <Text style = {styles.genericTitle}>{ABOUT_US.PROGRAMMERS_TITLE}</Text>
+                <Text style = {styles.genericText}>{ABOUT_US.PROGRAMMERS_TEXT}</Text>
+                <Text style = {styles.genericTitle}>{ABOUT_US.GRAPHIC_DESIGNERS_TITLE}</Text>
+                <Text style = {styles.genericText}>{ABOUT_US.GRAPHIC_DESIGNERS_TEXT}</Text>
+                <Text style = {styles.genericTitle}>{ABOUT_US.ACKNOWLEDGMENT_TITLE}</Text>
+                <Text style = {styles.genericText}>{ABOUT_US.ACKNOWLEDGMENT_TEXT}</Text>
+                <Text style = {styles.genericTitle}>{ABOUT_US.CONTACT_TITLE}</Text>
+                <Text style = {styles.genericText}>{ABOUT_US.CONTACT_TEXT}</Text>
+                <Text style = {[styles.genericTitle, {marginBottom: '5%'}]}>{ABOUT_US.PROJECT_INFO}</Text>
             </ScrollView>
             <TouchableOpacity style = {styles.button} onPress={() => navigation.navigate('SearchMenu')}>
-                <Text style = {{color: 'white'}}>ACEPTAR</Text>
+                <Text style = {{color: 'white'}}>{ABOUT_US.BUTTON_TEXT}</Text>
             </TouchableOpacity>
         </View>
     );

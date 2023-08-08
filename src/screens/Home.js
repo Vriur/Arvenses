@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Image, ImageBackground, Modal, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { APP, HOME } from '../../Constants';
 import BackgroundImg from './../assets/icons/img_inicio.jpg';
 import FabioIcon from './../assets/icons/fabio_icon.png';
 import UCRIcon from './../assets/icons/ucr_icon.png';
@@ -123,20 +124,20 @@ const Home = ({navigation}) => {
                     <Image source = {FabioIcon} style = {styles.icon} />
                 </View>
                 <View style = {styles.appInfo}>
-                    <Text style = {styles.appInfoText}> Pastarvenses {'\n'} V 1.0 </Text>
+                    <Text style = {styles.appInfoText}> {APP.NAME + '\n' + APP.VERSION} </Text>
                 </View>
                 <TouchableOpacity style = {styles.button} onPress={() => navigation.navigate('SearchMenu')}>
-                    <Text style = {styles.buttonText}>ENTRAR</Text>
+                    <Text style = {styles.buttonText}>{HOME.BUTTON_TEXT}</Text>
                 </TouchableOpacity>
             </ImageBackground>
             
             <Modal animationType = 'slide' transparent = {true} visible = {modalVisible} onRequestClose = {() => setModalVisible(!modalVisible)}>
                 <View style = {styles.modalViewBackground}>
                     <View style = {styles.modalView}>
-                        <Text style = {styles.modalTitle}>ADVERTENCIA</Text>
-                        <Text style = {styles.modalText}>La información sobre manejo acá se incluye de buena fe, con base en la información publicada. NO constituye recomendación, NI preferencia de los autores o la Universidad de Costa Rica.</Text>
+                        <Text style = {styles.modalTitle}>{HOME.MODAL_TITLE}</Text>
+                        <Text style = {styles.modalText}>{HOME.MODAL_TEXT}</Text>
                         <TouchableOpacity onPress={() => setModalVisible(!modalVisible)} style = {styles.modalButton}>
-                            <Text style = {styles.modalButtonText}>Entendido</Text>
+                            <Text style = {styles.modalButtonText}>{HOME.MODAL_BUTTON_TEXT}</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
