@@ -1,3 +1,4 @@
+import { Center } from 'native-base';
 import React from 'react';
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
@@ -36,7 +37,7 @@ const styles = StyleSheet.create({
     textData: {
         flex: 1,
         width: '100%',
-        alignItems: 'flex-start',
+        alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: 'white',
         borderBottomLeftRadius: 20,
@@ -50,12 +51,16 @@ const styles = StyleSheet.create({
         fontSize: 12,
     },
 
-    scientificName: {
+    name: {
+        textAlign: 'center',
         marginLeft: '5%',
         marginRight: '5%',
         color: '#41ade7',
-        fontSize: 10,
-        fontStyle: 'italic',
+        fontSize: 12
+    },
+
+    scientificName: {
+        fontStyle: 'italic'
     }
 });
 
@@ -73,8 +78,10 @@ const Card = (props) => {
                 <Image source = {pruebaFotos[cardData.id % 2]} style = {styles.image} />
             </View>
             <View style = {styles.textData}>
-                <Text style = {styles.name} numberOfLines={1} ellipsizeMode='tail' >{cardData.name}</Text>
-                <Text style = {styles.scientificName} numberOfLines={2} ellipsizeMode='tail' >{cardData.scientificName}</Text>
+                <Text style = {styles.name}>
+                    <Text style = {styles.scientificName} numberOfLines={2} ellipsizeMode='tail' >{cardData.scientificName}</Text>
+                    <Text numberOfLines={2} ellipsizeMode='tail' >{cardData.authors}</Text>
+                </Text>
             </View>
         </TouchableOpacity>
     );

@@ -76,3 +76,6 @@ export const ADITIONAL_INFORMATION = {
         {TEXT: 'Descargar Referencias', DOWNLOADABLE_FILE: 'pai'},
     ]
 };
+
+// Texto que se muestra al abrir algún archivo adicional.
+export const DOWNLOAD = 'Descargando...';

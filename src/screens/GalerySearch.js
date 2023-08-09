@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
 
 const GalerySearch = ({navigation}) => {
     const [data, setData] = useState([]);
-
+    
     useEffect(() => {
         async function fetchData(){
             let database = await openDatabase();
@@ -20,7 +20,12 @@ const GalerySearch = ({navigation}) => {
                     (query, resultSet) => {
                         let results = [];
                         resultSet.rows._array.forEach(item => {
-                            let result = {id: item._id, scientificName: item.scientific_name};
+                            /* Se separa el valor almacenado en la base de datos en el nombre de la planta y el 
+                               nombre del autor, esto con fin de que el nombre de la planta se muestre en itálica. */ 
+                            let name = item.scientific_name.split(' ');
+                            let scientificName = name.slice(0, 2).join(' ')  + ' ';
+                            let authors = name.slice(2).join(' ');
+                            let result = {id: item._id, scientificName: scientificName, authors: authors};
                             results.push(result);
                         });
                         setData(results);

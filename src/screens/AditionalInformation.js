@@ -18,7 +18,6 @@ const styles = StyleSheet.create({
 
     buttonText: {
         color: 'white',
-        fontStyle: 'italic',
         fontSize: 16
     },
 
@@ -29,7 +28,7 @@ const AditionalInformation = ({navigation}) => {
         <View style = {styles.container}>
             <FlatList data = {ADITIONAL_INFORMATION.BUTTONS}
                 renderItem = {({item}) => 
-                    <TouchableOpacity style = {styles.button} onPress={() => console.log(item.DOWNLOADABLE_FILE)}>
+                    <TouchableOpacity style = {styles.button} onPress = {() => navigation.navigate('PdfReader')}>
                         <Text style = {styles.buttonText}>{item.TEXT}</Text>
                     </TouchableOpacity>
                 }
