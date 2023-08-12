@@ -31,9 +31,9 @@ const styles = StyleSheet.create({
 const ResultMenu = ({route, navigation}) => {
     return(
         <SafeAreaView style = {styles.container}>
-            <ResultBar containerStyle = {styles.header} name = {route.params.scientificName} navigation = {navigation} />
+            <ResultBar containerStyle = {styles.header} name = {route.params.itemData.scientificName} navigation = {navigation} />
             <View style = {styles.mainContent}>
-                <ResultTab />
+                <ResultTab itemData = {route.params.itemData} />
             </View>
         </SafeAreaView>
     );

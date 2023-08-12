@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { TAXONOMY_SEARCH_WARNING } from './../../Constants';
+import TaxonomicCategory from './TaxonomicCategory';
 
 const styles = StyleSheet.create({
     container: {
@@ -31,7 +32,9 @@ const TaxonomySearch = ({navigation}) => {
             <View style = {styles.warning}>
                 <Text style = {styles.warningText}>{TAXONOMY_SEARCH_WARNING}</Text>
             </View>
-            <View style = {styles.mainContent}></View>
+            <View style = {styles.mainContent}>
+                <TaxonomicCategory />
+            </View>
         </View>
     );
 } 

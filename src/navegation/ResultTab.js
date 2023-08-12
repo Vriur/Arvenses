@@ -23,11 +23,11 @@ const styles = StyleSheet.create({
 
 const Tab = createBottomTabNavigator();
 
-const ResultTab = ({navigation}) => {
+const ResultTab = (props, {navigation}) => {
     return(
-        <Tab.Navigator screenOptions = {styles} initialRouteName = 'Atributos' >
+        <Tab.Navigator initialRouteName = 'Atributos' backBehavior = 'none' screenOptions = {styles}>
             <Tab.Screen name = {RESULT_TAB.IMAGES_NAME} component = {ResultImages} options = {{tabBarIcon:() => (<FontAwesomeIcon icon = {faImages} size = {28} style = {{color: 'white'}} />)}} />
-            <Tab.Screen name = {RESULT_TAB.ATTRIBUTE_NAME} component = {ResultAttributes} options = {{tabBarIcon:() => (<FontAwesomeIcon icon = {faList} size = {28} style = {{color: 'white'}} />)}} />
+            <Tab.Screen name = {RESULT_TAB.ATTRIBUTE_NAME} component = {ResultAttributes} initialParams = {props.itemData} options = {{tabBarIcon:() => (<FontAwesomeIcon icon = {faList} size = {28} style = {{color: 'white'}} />)}} />
         </Tab.Navigator>
     );
 } 

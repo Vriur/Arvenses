@@ -79,3 +79,11 @@ export const ADITIONAL_INFORMATION = {
 
 // Texto que se muestra al abrir algún archivo adicional.
 export const DOWNLOAD = 'Descargando...';
+
+/* Constantes correspondientes al texto mostrado en la pantalla de atributos de cada arvense. */
+export const ATTRIBUTES = {
+    CATEGORY: 'Categoría: ',
+    FAMILY: 'Familia: ',
+    SCIENTIFIC_NAME: 'Nombre Científico: ',
+    GENDER: 'Genéro: '
+};

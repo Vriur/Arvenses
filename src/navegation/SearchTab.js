@@ -2,9 +2,9 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { SEARCH_TAB } from './../../Constants';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import GalerySearch from '../screens/GalerySearch';
-import TaxonomySearch from '../screens/TaxonomySearch';
-import AditionalInformation from '../screens/AditionalInformation';
+import GalerySearch from './../screens/GalerySearch';
+import TaxonomySearch from './../screens/TaxonomySearch';
+import AditionalInformation from './../screens/AditionalInformation';
 
 const styles = StyleSheet.create({
     headerShown: false, 

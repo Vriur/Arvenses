@@ -1,22 +1,35 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { openDatabase } from '../../database-service';
-import CardList from '../components/molecules/CardList';
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
     },
+
+    button: {
+        backgroundColor: '#174c72',
+        flexDirection: 'row',
+        alignItems: 'center',
+        margin: '2%',
+        padding: '10%',
+        borderRadius: 20
+    },
+
+    buttonText: {
+        color: 'white',
+        fontSize: 16
+    },
 });
 
-const GalerySearch = ({navigation}) => {
-    const [data, setData] = useState([]);
+const TaxonomicSubCategory = ({navigation}) => {
+    const [categories, setCategories] = useState([]);
     
     useEffect(() => {
         async function fetchData(){
             let database = await openDatabase();
             database.transaction((query) => {
-                query.executeSql("SELECT _id, scientific_name FROM specie", [],
+                query.executeSql("SELECT _id, value FROM specie_category", [],
                     (query, resultSet) => {
                         let results = [];
                         resultSet.rows._array.forEach(item => {
@@ -38,10 +51,8 @@ const GalerySearch = ({navigation}) => {
     }, []);
 
     return(
-        <View style = {styles.container}>
-            <CardList data = {data} navigation = {navigation} />
-        </View>
+        <View style = {styles.container} />
     );
 } 
 
-export default GalerySearch;
+export default TaxonomicSubCategory;

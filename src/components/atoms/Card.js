@@ -1,6 +1,6 @@
-import { Center } from 'native-base';
 import React from 'react';
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { IMAGES } from './../../assets/requireFiles/images';
 
 const styles = StyleSheet.create({
     container: {
@@ -45,13 +45,6 @@ const styles = StyleSheet.create({
     },
 
     name: {
-        marginLeft: '5%',
-        marginRight: '5%',
-        color: '#174c72',
-        fontSize: 12,
-    },
-
-    name: {
         textAlign: 'center',
         marginLeft: '5%',
         marginRight: '5%',
@@ -66,16 +59,11 @@ const styles = StyleSheet.create({
 
 const Card = (props) => {
     let cardData = props.cardData;
-
-    let pruebaFotos = [
-        require('./../../assets/images/0/0_01.jpg'),
-        require('./../../assets/images/3/3_01.jpg')
-    ];
-
+    
     return(
-        <TouchableOpacity style = {styles.container} onPress={() => props.navigation.navigate('ResultMenu', {scientificName: cardData.scientificName})}>
+        <TouchableOpacity style = {styles.container} onPress={() => props.navigation.navigate('ResultMenu', {itemData: cardData})}>
             <View style = {styles.imageContainer}>
-                <Image source = {pruebaFotos[cardData.id % 2]} style = {styles.image} />
+                <Image source = {IMAGES[cardData.id % 2][0]} style = {styles.image} />
             </View>
             <View style = {styles.textData}>
                 <Text style = {styles.name}>
