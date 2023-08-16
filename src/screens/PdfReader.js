@@ -1,12 +1,12 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 import { WebView } from 'react-native-webview';
 import { DOWNLOAD } from '../../Constants';
 import Constants from 'expo-constants';
 import * as FileSystem from 'expo-file-system';
 import { Asset, useAssets } from 'expo-asset';
 
-const PdfReader = ({navigation}) => {
+const PdfReader = ({navigation: {goBack}}) => {
     const styles = StyleSheet.create({
         mainContent: {
             flex: 1,
@@ -26,10 +26,17 @@ const PdfReader = ({navigation}) => {
     }
     getFiles();*/
 
+    const handleLoad = () => {
+        if(Platform.OS === 'android'){
+            goBack();
+        }
+    };
+
     return(
         <WebView 
             source = {require('./../assets/files/1.pdf')} 
             downloadingMessage = {DOWNLOAD}
+            onLoadProgress = {handleLoad}
             style= {styles.mainContent}
         />
     );

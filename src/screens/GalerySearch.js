@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, TextInput, View } from 'react-native';
-import { Icons } from 'react-native-vector-icons';
 import { openDatabase } from '../../database-service';
 import { GALERY_SEARCH } from '../../Constants';
 import CardList from '../components/molecules/CardList';
