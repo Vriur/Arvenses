@@ -87,3 +87,9 @@ export const ATTRIBUTES = {
     SCIENTIFIC_NAME: 'Nombre Científico: ',
     GENDER: 'Genéro: '
 };
+
+/* Constantes correspondientes al texto mostrado en la pantalla del listado de arvenses. */
+export const GALERY_SEARCH = {
+    SEARCH_FIELD_PLACEHOLDER: 'Buscar',
+    NUMBER_QUANTITY_TEXT: 'La cantidad de arvenses es de '
+}

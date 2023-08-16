@@ -57,7 +57,7 @@ const MainBar = ({navigation, containerStyle}) => {
 
             <Menu style = {styles.menu}>
                 <MenuTrigger customStyles = {triggerStyles}>
-                    <FontAwesomeIcon icon = {faBars} size = {32} style = {{margin: '5%'}} />
+                    <FontAwesomeIcon icon = {faBars} size = {26} style = {{margin: '5%'}} />
                 </MenuTrigger>
                 <MenuOptions customStyles = {optionsStyles}>
                     <MenuOption text = {MAIN_BAR.APP_INFO} onSelect = {() => navigation.navigate('Home')} />
