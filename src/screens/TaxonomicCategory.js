@@ -13,19 +13,21 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         margin: '1%',
-        padding: '7%',
+        padding: '2%',
         borderRadius: 20,
         borderColor: '#174c72',
         borderWidth: 1
     },
 
     buttonText: {
+        flexGrow: 1,
+        marginLeft: '2%',
         color: '#174c72',
         fontSize: 16
     },
 
     imageContainer: {
-        height: '70%',
+        height: 60, 
         aspectRatio: 1 / 1,
         overflow: 'hidden',
         borderRadius: 10
@@ -34,7 +36,6 @@ const styles = StyleSheet.create({
     image: {
         width: '100%',
         height: '100%',
-        resizeMode: 'cover',
     },
 });
 
@@ -61,7 +62,7 @@ const TaxonomicCategory = ({navigation}) => {
         <View style = {styles.container}>
             <FlatList data = {categories}
                 renderItem = {({item}) => 
-                    <TouchableOpacity style = {styles.button} onPress = {() => navigation.navigate('TaxonomicSubCategory', {id: item['_id']})}>
+                    <TouchableOpacity style = {styles.button} onPress = {() => navigation.navigate('TaxonomicSubCategory', {categoryId: item._id})}>
                         <View style = {styles.imageContainer}>
                             <Image source = {tempIcon} style = {styles.image} />
                         </View>

@@ -1,6 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { TAXONOMY_SEARCH_WARNING } from './../../Constants';
+import { NavigationContainer } from '@react-navigation/native';
+import TaxonomyStack from './../navegation/TaxonomyStack';
 import TaxonomicCategory from './TaxonomicCategory';
 
 const styles = StyleSheet.create({
@@ -33,7 +35,9 @@ const TaxonomySearch = ({navigation}) => {
                 <Text style = {styles.warningText}>{TAXONOMY_SEARCH_WARNING}</Text>
             </View>
             <View style = {styles.mainContent}>
-                <TaxonomicCategory />
+                <NavigationContainer independent = {true}>
+                    <TaxonomyStack />
+                </NavigationContainer>
             </View>
         </View>
     );

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { openDatabase } from '../../database-service';
+import { AntDesign } from '@expo/vector-icons';
 
 const styles = StyleSheet.create({
     container: {
@@ -8,50 +9,77 @@ const styles = StyleSheet.create({
     },
 
     button: {
-        backgroundColor: '#174c72',
+        backgroundColor: 'white',
         flexDirection: 'row',
         alignItems: 'center',
-        margin: '2%',
-        padding: '10%',
-        borderRadius: 20
+        margin: '1%',
+        padding: '2%',
+        borderRadius: 20,
+        borderColor: '#174c72',
+        borderWidth: 1
     },
 
     buttonText: {
-        color: 'white',
+        flexGrow: 1,
+        marginLeft: '2%',
+        color: '#174c72',
         fontSize: 16
+    },
+
+    imageContainer: {
+        height: 60, 
+        aspectRatio: 1 / 1,
+        overflow: 'hidden',
+        borderRadius: 10
+    },
+
+    image: {
+        width: '100%',
+        height: '100%',
     },
 });
 
-const TaxonomicAttributes = ({navigation}) => {
-    const [categories, setCategories] = useState([]);
+const TaxonomicAttributes = ({navigation, route}) => {
+    const categoryId = route.params.categoryId;
+    const subCategoryId = route.params.subCategoryId;
+    const [attributes, setAttributes] = useState([]);
     
     useEffect(() => {
         async function fetchData(){
             let database = await openDatabase();
             database.transaction((query) => {
-                query.executeSql("SELECT _id, value FROM specie_category", [],
+                query.executeSql(
+                    `SELECT _id, category_value AS value
+                    FROM attribute_category 
+                    WHERE specie_category_id = 1
+                    AND category_main_id = ?`, [subCategoryId],
                     (query, resultSet) => {
-                        let results = [];
-                        resultSet.rows._array.forEach(item => {
-                            /* Se separa el valor almacenado en la base de datos en el nombre de la planta y el 
-                               nombre del autor, esto con fin de que el nombre de la planta se muestre en itálica. */ 
-                            let name = item.scientific_name.split(' ');
-                            let scientificName = name.slice(0, 2).join(' ')  + ' ';
-                            let authors = name.slice(2).join(' ');
-                            let result = {id: item._id, scientificName: scientificName, authors: authors};
-                            results.push(result);
-                        });
-                        setData(results);
+                        console.log('sub category id', subCategoryId);
+                        console.log(resultSet.rows._array);
+                        setAttributes(resultSet.rows._array);
                     },
                     (query, error) => {console.log(error)}
                 )
             });
         } 
         fetchData();
-    }, []);
+    }, [categoryId]);
 
+    const tempIcon = require('./../assets/icons/app_icon.png');
     return(
-        <View />
+        <View style = {styles.container}>
+            <FlatList data = {attributes}
+                renderItem = {({item}) => 
+                    <TouchableOpacity style = {styles.button} onPress = {() => console.log('FALTA')}>
+                        <TouchableOpacity style = {styles.imageContainer} onLongPress = {() => navigation.navigate('TaxonomicIconInformation', {id: item._id})}>
+                            <Image source = {tempIcon} style = {styles.image} />
+                        </TouchableOpacity>
+                        <Text style = {styles.buttonText}>{item.value}</Text>
+                        <AntDesign name="right" size={24} color="#174c72" />
+                    </TouchableOpacity>
+                }
+            />
+        </View>
     );
 } 
 

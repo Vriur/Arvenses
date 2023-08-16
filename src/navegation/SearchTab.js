@@ -28,7 +28,7 @@ const Tab = createMaterialTopTabNavigator();
 const SearchTab = ({navigation}) => {
     return(
         <Tab.Navigator screenOptions = {styles} >
-            <Tab.Screen name = {SEARCH_TAB.GALERY_NAME} component = {GalerySearch} navigation = {navigation} />
+            <Tab.Screen name = {SEARCH_TAB.GALERY_NAME} component = {GalerySearch} />
             <Tab.Screen name = {SEARCH_TAB.TAXONOMY_NAME} component = {TaxonomySearch} />
             <Tab.Screen name = {SEARCH_TAB.ADITIONAL_INFORMATION_NAME} component = {AditionalInformation} />
         </Tab.Navigator>

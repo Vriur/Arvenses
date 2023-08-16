@@ -8,16 +8,18 @@ const styles = StyleSheet.create({
     },
 
     button: {
+        height: 80,
         backgroundColor: '#174c72',
         flexDirection: 'row',
         alignItems: 'center',
-        margin: '2%',
-        padding: '10%',
+        margin: '1%',
+        padding: '2%',
         borderRadius: 20,
     },
 
     buttonText: {
         color: 'white',
+        marginLeft: '2%',
         fontSize: 16
     },
 
