@@ -26,8 +26,8 @@ const Tab = createBottomTabNavigator();
 const ResultTab = (props, {navigation}) => {
     return(
         <Tab.Navigator initialRouteName = 'Atributos' backBehavior = 'none' screenOptions = {styles}>
-            <Tab.Screen name = {RESULT_TAB.IMAGES_NAME} component = {ResultImages} options = {{tabBarIcon:() => (<FontAwesomeIcon icon = {faImages} size = {28} style = {{color: 'white'}} />)}} />
             <Tab.Screen name = {RESULT_TAB.ATTRIBUTE_NAME} component = {ResultAttributes} initialParams = {props.itemData} options = {{tabBarIcon:() => (<FontAwesomeIcon icon = {faList} size = {28} style = {{color: 'white'}} />)}} />
+            <Tab.Screen name = {RESULT_TAB.IMAGES_NAME} component = {ResultImages} initialParams = {{id: props.itemData.id}} options = {{tabBarIcon:() => (<FontAwesomeIcon icon = {faImages} size = {28} style = {{color: 'white'}} />)}} />
         </Tab.Navigator>
     );
 } 
