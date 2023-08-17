@@ -20,10 +20,14 @@ const styles = StyleSheet.create({
     },
 
     buttonText: {
-        flexGrow: 1,
+        maxWidth: '60%',
         marginLeft: '2%',
         color: '#174c72',
         fontSize: 16
+    },
+
+    spaceFiller: {
+        flexGrow: 1
     },
 
     imageContainer: {
@@ -48,7 +52,7 @@ const TaxonomicSubCategory = ({navigation, route}) => {
             let database = await openDatabase();
             database.transaction((query) => {
                 query.executeSql(
-                    `SELECT _id, category_value AS value
+                    `SELECT _id, category_value AS name, description
                     FROM attribute_category 
                     WHERE specie_category_id = ?
                     AND category_main_id IS NULL`, [categoryId],
@@ -68,10 +72,11 @@ const TaxonomicSubCategory = ({navigation, route}) => {
             <FlatList data = {subCategories}
                 renderItem = {({item}) => 
                     <TouchableOpacity style = {styles.button} onPress = {() => navigation.navigate('TaxonomicAttributes', {categoryId: categoryId, subCategoryId: item._id})}>
-                        <TouchableOpacity style = {styles.imageContainer} onLongPress = {() => navigation.navigate('TaxonomicIconInformation', {id: item._id})}>
+                        <TouchableOpacity style = {styles.imageContainer} onLongPress = {() => navigation.navigate('TaxonomicIconInformation', {id: item._id, name: item.name, description: item.description})}>
                             <Image source = {tempIcon} style = {styles.image} />
                         </TouchableOpacity>
-                        <Text style = {styles.buttonText}>{item.value}</Text>
+                        <Text style = {styles.buttonText}>{item.name}</Text>
+                        <View style = {styles.spaceFiller} />
                         <AntDesign name="right" size={24} color="#174c72" />
                     </TouchableOpacity>
                 }

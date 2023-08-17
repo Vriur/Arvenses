@@ -1,43 +1,86 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { openDatabase } from '../../database-service';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { GO_BACK } from '../../Constants';
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        alignItems: 'center',
+        margin: '2%',
+        backgroundColor: 'white',
+        borderRadius: 20,
+        borderWidth: 1,
+        borderBottomColor: '#174c72'
+    },
+
+    button: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: 80,
+        padding: '2%',
+        width: '100%',
+        borderRadius: 20,
+        borderColor: '#174c72',
+        backgroundColor: '#174c72',
+        borderWidth: 1,
+    },
+
+    textButton: {
+        color: 'white',
+        fontSize: 16
+    },
+
+    name: {
+        maxWidth: '80%',
+        marginBottom: '2%',
+        color: '#174c72',
+        fontSize: 24
+    },
+
+    description: {
+        maxWidth: '90%',
+        color: '#174c72',
+        fontSize: 16
+    },
+
+    spaceFiller: {
+        flexGrow: 1
+    },
+
+    imageContainer: {
+        height: 120, 
+        marginTop: '5%',
+        marginBottom: '2%',
+        aspectRatio: 1 / 1,
+        overflow: 'hidden',
+        borderRadius: 10
+    },
+
+    image: {
+        width: '100%',
+        height: '100%',
     },
 });
 
-const TaxonomicIconInformation = ({navigation}) => {
-    const [categories, setCategories] = useState([]);
-    
-    useEffect(() => {
-        async function fetchData(){
-            let database = await openDatabase();
-            database.transaction((query) => {
-                query.executeSql("SELECT _id, value FROM specie_category", [],
-                    (query, resultSet) => {
-                        let results = [];
-                        resultSet.rows._array.forEach(item => {
-                            /* Se separa el valor almacenado en la base de datos en el nombre de la planta y el 
-                               nombre del autor, esto con fin de que el nombre de la planta se muestre en itálica. */ 
-                            let name = item.scientific_name.split(' ');
-                            let scientificName = name.slice(0, 2).join(' ')  + ' ';
-                            let authors = name.slice(2).join(' ');
-                            let result = {id: item._id, scientificName: scientificName, authors: authors};
-                            results.push(result);
-                        });
-                        setData(results);
-                    },
-                    (query, error) => {console.log(error)}
-                )
-            });
-        } 
-        fetchData();
-    }, []);
+const TaxonomicIconInformation = ({route, navigation: {goBack}}) => {
+    const id = route.params.id;
+    const name = route.params.name;
+    const description = route.params.description;
 
+    const tempIcon = require('./../assets/icons/app_icon.png');
     return(
-        <View style = {styles.container} />
+        <View style = {styles.container}>
+            <View style = {styles.imageContainer}>
+                <Image source = {tempIcon} style = {styles.image} />
+            </View>
+            <Text style = {styles.name}>{name}</Text>
+            <Text style = {styles.description}>{description}</Text>
+            <View style = {styles.spaceFiller} />
+            <TouchableOpacity style = {styles.button} onPress = {() => goBack()}>
+                <Text style = {styles.textButton}>{GO_BACK}</Text>
+            </TouchableOpacity>
+        </View>
     );
 } 
 

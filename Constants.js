@@ -93,3 +93,5 @@ export const GALERY_SEARCH = {
     SEARCH_FIELD_PLACEHOLDER: 'Buscar',
     NUMBER_QUANTITY_TEXT: 'La cantidad de arvenses es de '
 }
+
+export const GO_BACK = 'Volver';

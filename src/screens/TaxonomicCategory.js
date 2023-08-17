@@ -20,10 +20,14 @@ const styles = StyleSheet.create({
     },
 
     buttonText: {
-        flexGrow: 1,
+        maxWidth: '60%',
         marginLeft: '2%',
         color: '#174c72',
         fontSize: 16
+    },
+
+    spaceFiller: {
+        flexGrow: 1
     },
 
     imageContainer: {
@@ -67,6 +71,7 @@ const TaxonomicCategory = ({navigation}) => {
                             <Image source = {tempIcon} style = {styles.image} />
                         </View>
                         <Text style = {styles.buttonText}>{item.value}</Text>
+                        <View style = {styles.spaceFiller} />
                         <AntDesign name="right" size={24} color="#174c72" />
                     </TouchableOpacity>
                 }
