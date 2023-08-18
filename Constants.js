@@ -95,3 +95,36 @@ export const GALERY_SEARCH = {
 }
 
 export const GO_BACK = 'Volver';
+
+export const MISSING_INFORMATION = {
+    NAME: '¿Flores ausentes?',
+    CONTACT_Label: 'Contacto:',
+    OPTIONS: [
+        {
+            TITLE: 'Opción 1.',
+            DESCRIPTION: 'Enviar una foto a la encargada de identificación taxonómica de malezas del Programa de Malezas de la Universidad de Costa Rica.',
+            INFORMATION: [
+                {
+                    NAME: 'Mary Pamela Portuguez García',
+                    CONTACTS: ['mary.portuguez@ucr.ac.cr']
+                }
+            ]
+            
+        },
+        {
+            TITLE: 'Opción 2.',
+            DESCRIPTION: 'Trasladar la muestra al Laboratorio de Malezas para su correcta identificación.\nUbicación: La Estación Experimental Agrícola Fabio Baudrit Moreno, se ubica en el distrito San José de Alajuela (2 km oeste de la iglesia católica en Barrio San José, carretera a Atenas).',
+            INFORMATION: [
+                {
+                    NAME: 'Recepción Estación Experimental Agrícola Fabio Baudrit Moreno',
+                    CONTACTS: ['2511-7798', 'eeafbmrecepcion@ucr.ac.cr']
+                },
+                {
+                    NAME: 'Mary Pamela Portuguez García',
+                    CONTACTS: ['2511-7778', 'mary.portuguez@ucr.ac.cr']
+                }
+            ]
+            
+        }
+    ]
+}

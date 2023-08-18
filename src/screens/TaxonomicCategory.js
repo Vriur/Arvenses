@@ -2,10 +2,29 @@ import React, { useEffect, useState } from 'react';
 import { FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { openDatabase } from '../../database-service';
 import { AntDesign } from '@expo/vector-icons';
+import { TAXONOMY_SEARCH_WARNING } from './../../Constants';
+import { ICONS } from './../assets/requireFiles/icons';
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+    },
+
+    mainContent: {
+        flex: 17,
+    },
+
+    warning: {
+        flex: 3,
+        backgroundColor: '#e46305',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+
+    warningText: {
+        color: 'white',
+        textAlign: 'center',
+        fontSize: 18
     },
 
     button: {
@@ -61,21 +80,25 @@ const TaxonomicCategory = ({navigation}) => {
         fetchData();
     }, []);
 
-    const tempIcon = require('./../assets/icons/app_icon.png');
     return(
         <View style = {styles.container}>
-            <FlatList data = {categories}
-                renderItem = {({item}) => 
-                    <TouchableOpacity style = {styles.button} onPress = {() => navigation.navigate('TaxonomicSubCategory', {categoryId: item._id})}>
-                        <View style = {styles.imageContainer}>
-                            <Image source = {tempIcon} style = {styles.image} />
-                        </View>
-                        <Text style = {styles.buttonText}>{item.value}</Text>
-                        <View style = {styles.spaceFiller} />
-                        <AntDesign name="right" size={24} color="#174c72" />
-                    </TouchableOpacity>
-                }
-            />
+            <View style = {styles.warning}>
+                <Text style = {styles.warningText}>{TAXONOMY_SEARCH_WARNING}</Text>
+            </View>
+            <View style = {styles.mainContent}>
+                <FlatList data = {categories}
+                    renderItem = {({item}) => 
+                        <TouchableOpacity style = {styles.button} onPress = {() => navigation.navigate('TaxonomicSubCategory', {categoryId: item._id})}>
+                            <View style = {styles.imageContainer}>
+                                <Image source = {ICONS[0]} style = {styles.image} />
+                            </View>
+                            <Text style = {styles.buttonText}>{item.value}</Text>
+                            <View style = {styles.spaceFiller} />
+                            <AntDesign name="right" size={24} color="#174c72" />
+                        </TouchableOpacity>
+                    }
+                />
+            </View>
         </View>
     );
 } 

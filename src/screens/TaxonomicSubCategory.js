@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { openDatabase } from '../../database-service';
 import { AntDesign } from '@expo/vector-icons';
+import { MISSING_INFORMATION } from '../../Constants';
+import { ICONS } from '../assets/requireFiles/icons';
 
 const styles = StyleSheet.create({
     container: {
@@ -66,16 +68,25 @@ const TaxonomicSubCategory = ({navigation, route}) => {
         fetchData();
     }, [categoryId]);
 
-    const tempIcon = require('./../assets/icons/app_icon.png');
     return(
         <View style = {styles.container}>
             <FlatList data = {subCategories}
                 renderItem = {({item}) => 
                     <TouchableOpacity style = {styles.button} onPress = {() => navigation.navigate('TaxonomicAttributes', {categoryId: categoryId, subCategoryId: item._id})}>
                         <TouchableOpacity style = {styles.imageContainer} onLongPress = {() => navigation.navigate('TaxonomicIconInformation', {id: item._id, name: item.name, description: item.description})}>
-                            <Image source = {tempIcon} style = {styles.image} />
+                            <Image source = {ICONS[0]} style = {styles.image} />
                         </TouchableOpacity>
                         <Text style = {styles.buttonText}>{item.name}</Text>
+                        <View style = {styles.spaceFiller} />
+                        <AntDesign name="right" size={24} color="#174c72" />
+                    </TouchableOpacity>
+                }
+                ListFooterComponent = {
+                    <TouchableOpacity style = {styles.button} onPress = {() => navigation.navigate('TaxonomicMissingInformation')}>
+                        <View style = {styles.imageContainer}>
+                            <Image source = {ICONS[0]} style = {styles.image} />
+                        </View>
+                        <Text style = {styles.buttonText}>{MISSING_INFORMATION.NAME}</Text>
                         <View style = {styles.spaceFiller} />
                         <AntDesign name="right" size={24} color="#174c72" />
                     </TouchableOpacity>

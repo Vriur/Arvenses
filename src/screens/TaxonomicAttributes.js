@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { FlatList, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { openDatabase } from '../../database-service';
 import { AntDesign } from '@expo/vector-icons';
+import { ICONS } from './../assets/requireFiles/icons';
 
 const styles = StyleSheet.create({
     container: {
@@ -9,21 +10,31 @@ const styles = StyleSheet.create({
     },
 
     optionsContainer: {
-        margin: '1%',
-        borderRadius: 20,
+        marginBottom: '1%',
+        marginHorizontal: '1%',
+        borderBottomLeftRadius: 20,
+        borderBottomRightRadius: 20,
         borderColor: '#174c72',
         borderWidth: 1,
+        borderTopWidth: 0
     },
 
     button: {
         backgroundColor: 'white',
         flexDirection: 'row',
         alignItems: 'center',
-        margin: '1%',
+        marginTop: '2%',
+        marginHorizontal: '1%',
         padding: '2%',
-        borderRadius: 20,
+        borderTopRightRadius: 20,
+        borderTopLeftRadius: 20,
         borderColor: '#174c72',
         borderWidth: 1
+    },
+
+    buttonWithoutOptions: {
+        borderBottomRightRadius: 20,
+        borderBottomLeftRadius: 20,
     },
 
     optionButton: {
@@ -106,6 +117,7 @@ const TaxonomicAttributes = ({navigation, route}) => {
             accumulator[item.attribute_id] = accumulator[item.attribute_id] || {
                 'attribute_name': item.attribute_name,
                 'attribute_description': item.attribute_description,
+                'showOptions': false,
             };
 
             // Si el atributo no cuenta con valores, se inicializa el array de estos.
@@ -124,40 +136,48 @@ const TaxonomicAttributes = ({navigation, route}) => {
         return groupedObject;
     }
 
-    const tempIcon = require('./../assets/icons/app_icon.png');
+    const handleShowOptions = (id) => {
+        let newAttributes = {...attributes};
+        newAttributes[id]['showOptions'] = !attributes[id]['showOptions'];
+        setAttributes(newAttributes);
+    }
+
     return(
         <ScrollView style = {styles.container}>
             { 
                 /* Mapeo correspondiente a los atributos del arvense. */
                 Object.keys(attributes).map(item => {
                     return (
-                        <View>
-                            <TouchableOpacity key = {item} style = {styles.button} onPress = {() => console.log('FALTA')}>
+                        <View key = {item}>
+                            <TouchableOpacity key = {item} style = {attributes[item]['showOptions'] ? styles.button : [styles.button, styles.buttonWithoutOptions]} onPress = {() => handleShowOptions(item)}>
                                 <TouchableOpacity style = {styles.imageContainer} onLongPress = {() => navigation.navigate('TaxonomicIconInformation', {id: item, name: attributes[item]['attribute_name'], description: attributes[item]['attribute_description']})}>
-                                    <Image source = {tempIcon} style = {styles.image} />
+                                    <Image source = {ICONS[0]} style = {styles.image} />
                                 </TouchableOpacity>
                                 <Text style = {styles.buttonText}>{attributes[item]['attribute_name']}</Text>
                                 <View style = {styles.spaceFiller} />
                                 <AntDesign name="down" size={24} color="#174c72" />
                             </TouchableOpacity>
 
-                            <View key = {`${item}_options`} style = {styles.optionsContainer}>
-                                {
-                                    /* Mapeo correspondiente a las opciones de cada atributo. */    
-                                    attributes[item]['options'].map(option => {
-                                        return (
-                                            <TouchableOpacity key = {`${item}_${option['attribute_option_id']}`} style = {styles.optionButton} onPress = {() => console.log('FALTA')}>
-                                                <TouchableOpacity style = {styles.optionImageContainer} onLongPress = {() => navigation.navigate('TaxonomicIconInformation', {id: option['attribute_option_id'], name: option['attribute_option_name'], description: option['attribute_option_description']})}>
-                                                    <Image source = {tempIcon} style = {styles.image} />
+                            {
+                                attributes[item]['showOptions'] &&
+                                <View key = {`${item}_options`} style = {styles.optionsContainer}>
+                                    {
+                                        /* Mapeo correspondiente a las opciones de cada atributo. */    
+                                        attributes[item]['options'].map(option => {
+                                            return (
+                                                <TouchableOpacity key = {`${item}_${option['attribute_option_id']}`} style = {styles.optionButton} onPress = {() => console.log('FALTA')}>
+                                                    <TouchableOpacity style = {styles.optionImageContainer} onLongPress = {() => navigation.navigate('TaxonomicIconInformation', {id: option['attribute_option_id'], name: option['attribute_option_name'], description: option['attribute_option_description']})}>
+                                                        <Image source = {ICONS[0]} style = {styles.image} />
+                                                    </TouchableOpacity>
+                                                    <Text style = {styles.optionButtonText}>{option['attribute_option_name']}</Text>
+                                                    <View style = {styles.spaceFiller} />
                                                 </TouchableOpacity>
-                                                <Text style = {styles.optionButtonText}>{option['attribute_option_name']}</Text>
-                                                <View style = {styles.spaceFiller} />
-                                            </TouchableOpacity>
-                                        )
-                                    })
-                                }
-                            </View>   
-                        </View>               
+                                            )
+                                        })
+                                    }
+                                </View>
+                            }   
+                        </View>             
                     );
                 })
             }
