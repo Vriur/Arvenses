@@ -10,6 +10,7 @@ const styles = StyleSheet.create({
     icon: {
         width: '15%',
         height: '90%',
+        borderRadius: 10,
         resizeMode: 'contain'
     },
 
@@ -20,6 +21,7 @@ const styles = StyleSheet.create({
         fontSize: 25,
         fontWeight: 'bold',
         textDecorationLine: 'underline',
+        marginLeft: 10
     },
 
     menu: {

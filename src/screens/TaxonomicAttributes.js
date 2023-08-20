@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import BouncyCheckbox from "react-native-bouncy-checkbox";
 import { openDatabase } from '../../database-service';
 import { AntDesign } from '@expo/vector-icons';
 import { ICONS } from './../assets/requireFiles/icons';
@@ -7,6 +8,13 @@ import { ICONS } from './../assets/requireFiles/icons';
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+    },
+
+    path: {
+        color: 'white',
+        fontSize: 16,
+        padding: 10,
+        backgroundColor: '#174c72'
     },
 
     optionsContainer: {
@@ -85,8 +93,7 @@ const styles = StyleSheet.create({
 });
 
 const TaxonomicAttributes = ({navigation, route}) => {
-    const categoryId = route.params.categoryId;
-    const subCategoryId = route.params.subCategoryId;
+    const path = route.params.path;
     const [attributes, setAttributes] = useState([]);
     
     useEffect(() => {
@@ -99,7 +106,7 @@ const TaxonomicAttributes = ({navigation, route}) => {
                     JOIN attribute AS a
                     ON ac._id = a.attribute_category_id
                     WHERE ac.specie_category_id = ?
-                    AND ac.category_main_id = ?`, [categoryId, subCategoryId],
+                    AND ac.category_main_id = ?`, [path.categoryId, path.subCategoryId],
                     (query, resultSet) => {
                         let attributes = groupObject(resultSet.rows._array);
                         setAttributes(attributes);
@@ -109,7 +116,7 @@ const TaxonomicAttributes = ({navigation, route}) => {
             });
         } 
         fetchData();
-    }, [categoryId, subCategoryId]);
+    }, [path]);
 
     // Esta función se encarga de agrupar los atributos en la jerarquía correspondiente.
     const groupObject = (object) => {
@@ -144,6 +151,7 @@ const TaxonomicAttributes = ({navigation, route}) => {
 
     return(
         <ScrollView style = {styles.container}>
+            <Text style = {styles.path}>{`${path.categoryName}/ ${path.subCategoryName}/`}</Text>
             { 
                 /* Mapeo correspondiente a los atributos del arvense. */
                 Object.keys(attributes).map(item => {
@@ -165,13 +173,18 @@ const TaxonomicAttributes = ({navigation, route}) => {
                                         /* Mapeo correspondiente a las opciones de cada atributo. */    
                                         attributes[item]['options'].map(option => {
                                             return (
-                                                <TouchableOpacity key = {`${item}_${option['attribute_option_id']}`} style = {styles.optionButton} onPress = {() => console.log('FALTA')}>
+                                                <View key = {`${item}_${option['attribute_option_id']}`} style = {styles.optionButton}>
                                                     <TouchableOpacity style = {styles.optionImageContainer} onLongPress = {() => navigation.navigate('TaxonomicIconInformation', {id: option['attribute_option_id'], name: option['attribute_option_name'], description: option['attribute_option_description']})}>
                                                         <Image source = {ICONS[0]} style = {styles.image} />
                                                     </TouchableOpacity>
                                                     <Text style = {styles.optionButtonText}>{option['attribute_option_name']}</Text>
                                                     <View style = {styles.spaceFiller} />
-                                                </TouchableOpacity>
+                                                    <BouncyCheckbox 
+                                                        size = {30} 
+                                                        fillColor = '#174c72' 
+                                                        onPress = {(isChecked) => {isChecked = !isChecked}} 
+                                                    />
+                                                </View>
                                             )
                                         })
                                     }

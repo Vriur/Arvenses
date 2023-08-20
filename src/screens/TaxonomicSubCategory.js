@@ -10,6 +10,13 @@ const styles = StyleSheet.create({
         flex: 1,
     },
 
+    path: {
+        color: 'white',
+        fontSize: 16,
+        padding: 10,
+        backgroundColor: '#174c72'
+    },
+
     button: {
         backgroundColor: 'white',
         flexDirection: 'row',
@@ -46,7 +53,7 @@ const styles = StyleSheet.create({
 });
 
 const TaxonomicSubCategory = ({navigation, route}) => {
-    const categoryId = route.params.categoryId;
+    const path = route.params.path;
     const [subCategories, setSubCategories] = useState([]);
     
     useEffect(() => {
@@ -57,7 +64,7 @@ const TaxonomicSubCategory = ({navigation, route}) => {
                     `SELECT _id, category_value AS name, description
                     FROM attribute_category 
                     WHERE specie_category_id = ?
-                    AND category_main_id IS NULL`, [categoryId],
+                    AND category_main_id IS NULL`, [path.categoryId],
                     (query, resultSet) => {
                         setSubCategories(resultSet.rows._array);
                     },
@@ -66,13 +73,14 @@ const TaxonomicSubCategory = ({navigation, route}) => {
             });
         } 
         fetchData();
-    }, [categoryId]);
+    }, [path.categoryId]);
 
     return(
         <View style = {styles.container}>
+            <Text style = {styles.path}>{`${path.categoryName}/`}</Text>
             <FlatList data = {subCategories}
                 renderItem = {({item}) => 
-                    <TouchableOpacity style = {styles.button} onPress = {() => navigation.navigate('TaxonomicAttributes', {categoryId: categoryId, subCategoryId: item._id})}>
+                    <TouchableOpacity style = {styles.button} onPress = {() => navigation.navigate('TaxonomicAttributes', {path: {...path, subCategoryId: item._id, subCategoryName: item.name}})}>
                         <TouchableOpacity style = {styles.imageContainer} onLongPress = {() => navigation.navigate('TaxonomicIconInformation', {id: item._id, name: item.name, description: item.description})}>
                             <Image source = {ICONS[0]} style = {styles.image} />
                         </TouchableOpacity>

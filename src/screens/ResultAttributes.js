@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
 
     },
 
-    author: {
+    plant: {
         fontStyle: 'italic'
     }
 });
@@ -144,8 +144,8 @@ const ResultAttributes = (initialParams) => {
                 <Text>
                     <Text style = {styles.label}>{ATTRIBUTES.SCIENTIFIC_NAME}</Text>
                     <Text style = {styles.value}>
-                        <Text>{itemData.scientificName + ' '}</Text>
-                        <Text style = {styles.author}>{itemData.authors}</Text>
+                        <Text style = {styles.plant}>{itemData.scientificName + ' '}</Text>
+                        <Text>{itemData.authors}</Text>
                     </Text>
                 </Text>
             </View>

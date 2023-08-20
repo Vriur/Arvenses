@@ -1,6 +1,6 @@
 import React from 'react';
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { ABOUT_US, APP } from '../../Constants';
+import { Linking, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { ABOUT_US, APP, CONTACT_PREFIX } from '../../Constants';
 
 const styles = StyleSheet.create({
     container: {
@@ -19,6 +19,11 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: 'bold',
         marginLeft: '5%',
+    },
+
+    hyperLink: {
+        color: '#41ade7',
+        textDecorationLine: 'underline'
     },
 
     scrollSection: {
@@ -46,7 +51,6 @@ const styles = StyleSheet.create({
         fontSize: 20,
         marginHorizontal: '4%',
         marginTop: '2%',
-        textAlign: 'justify'
     },
 });
 
@@ -66,7 +70,10 @@ const AboutUs = ({navigation}) => {
                 <Text style = {styles.genericTitle}>{ABOUT_US.ACKNOWLEDGMENT_TITLE}</Text>
                 <Text style = {styles.genericText}>{ABOUT_US.ACKNOWLEDGMENT_TEXT}</Text>
                 <Text style = {styles.genericTitle}>{ABOUT_US.CONTACT_TITLE}</Text>
-                <Text style = {styles.genericText}>{ABOUT_US.CONTACT_TEXT}</Text>
+                <Text style = {styles.genericText}>
+                    <Text style = {styles.genericText}>{ABOUT_US.CONTACT_TEXT}</Text>
+                    <Text style = {[styles.genericText, styles.hyperLink]} onPress={() => Linking.openURL(`${CONTACT_PREFIX[ABOUT_US.CONTACT_LINK.PREFIX]}${ABOUT_US.CONTACT_LINK.VALUE}`)}>{ABOUT_US.CONTACT_LINK.VALUE}</Text>
+                </Text>
                 <Text style = {[styles.genericTitle, {marginBottom: '5%'}]}>{ABOUT_US.PROJECT_INFO}</Text>
             </ScrollView>
             <TouchableOpacity style = {styles.button} onPress={() => navigation.navigate('SearchMenu')}>

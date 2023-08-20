@@ -1,6 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { GO_BACK, MISSING_INFORMATION } from '../../Constants';
+import { FlatList, Linking, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { AntDesign } from '@expo/vector-icons'; 
+import { CONTACT_PREFIX, GO_BACK, MISSING_INFORMATION } from '../../Constants';
 
 const styles = StyleSheet.create({
     container: {
@@ -31,43 +32,72 @@ const styles = StyleSheet.create({
         fontSize: 16
     },
 
-    name: {
-        maxWidth: '80%',
-        marginBottom: '2%',
+    title: {
+        fontSize: 20,
         color: '#174c72',
-        fontSize: 24
+        marginTop: '5%',
     },
 
     description: {
-        maxWidth: '90%',
-        color: '#174c72',
-        fontSize: 16
+        fontSize: 16,
+        color: 'black',
+        maxWidth: '94%',
+        marginTop: '2%'
     },
 
-    spaceFiller: {
-        flexGrow: 1
+    contactName: {
+        fontSize: 14,
+        fontWeight: 'bold',
+        color: 'black',
+        maxWidth: '94%',
+        marginTop: '2%'
     },
 
-    imageContainer: {
-        height: 120, 
-        marginTop: '5%',
-        marginBottom: '2%',
-        aspectRatio: 1 / 1,
-        overflow: 'hidden',
-        borderRadius: 10
+    contactContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        margin: '2%',
+        borderColor: '#41ade7',
+        borderWidth: 1,
+        borderRadius: 20,
+        paddingHorizontal: 10,
+        paddingVertical: 2
     },
 
-    image: {
-        width: '100%',
-        height: '100%',
+    contactInfo: {
+        color: '#41ade7',
+        textDecorationLine: 'underline',
+        marginLeft: 5
     },
 });
 
 const TaxonomicMissingInformation = ({navigation: {goBack}}) => {
     return(
         <View style = {styles.container}>
-            <Text style = {styles.description}>{JSON.stringify(MISSING_INFORMATION.OPTIONS)}</Text>
-            <View style = {styles.spaceFiller} />
+            <FlatList data = {MISSING_INFORMATION.OPTIONS} showsVerticalScrollIndicator={false} showsHorizontalScrollIndicator={false}
+                renderItem = {({item}) => 
+                    <View>
+                        <Text style = {styles.title}>{item.TITLE}</Text>
+                        <Text style = {styles.description}>{item.DESCRIPTION}</Text>
+                        <Text style = {styles.description}>{MISSING_INFORMATION.CONTACT_Label}</Text>
+                        <FlatList data = {item.INFORMATION} showsVerticalScrollIndicator={false} showsHorizontalScrollIndicator={false}
+                            renderItem = {({item}) => 
+                                <View>
+                                    <Text style = {styles.contactName}>{item.NAME}</Text>
+                                    <FlatList data = {item.CONTACTS} showsVerticalScrollIndicator={false} showsHorizontalScrollIndicator={false}
+                                        renderItem = {({item}) => 
+                                            <TouchableOpacity style = {styles.contactContainer} onPress={() => {Linking.openURL(`${CONTACT_PREFIX[item.PREFIX]}${item.VALUE}`)}}>
+                                                <AntDesign name="contacts" size={24} color="#41ade7" />
+                                                <Text style = {styles.contactInfo} >{item.VALUE}</Text>
+                                            </TouchableOpacity>
+                                        }
+                                    />
+                                </View>
+                            }
+                        />
+                    </View>
+                }
+            />
             <TouchableOpacity style = {styles.button} onPress = {() => goBack()}>
                 <Text style = {styles.textButton}>{GO_BACK}</Text>
             </TouchableOpacity>

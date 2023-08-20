@@ -1,3 +1,6 @@
+import { prefix } from "@fortawesome/free-regular-svg-icons";
+import { Text } from "react-native";
+
 /* Nombre de las pestañas correspondientes al menú principal. */
 export const SEARCH_TAB = {
     GALERY_NAME: 'Galería',
@@ -16,7 +19,7 @@ export const TAXONOMY_SEARCH_WARNING = '¡Recuerde que cuando cambie de hoja anc
 
 /* Estas constantes corresponden al nombre que se va a mostrar a lo largo de la app y la versión correspondiente. */
 export const APP = {
-    NAME: 'Pastarvenses',
+    NAME: 'Caféarvenses',
     VERSION: 'V 1.0'
 };
 
@@ -44,9 +47,13 @@ export const ABOUT_US = {
     GRAPHIC_DESIGNERS_TITLE: 'Diseñadores Gráficos:',
     GRAPHIC_DESIGNERS_TEXT: 'Evelin Naranjo Madrigal, Jasmín Ortega Gutiérrez y Kevin Amador Navarro.',
     ACKNOWLEDGMENT_TITLE: 'Agradecimiento:',
-    ACKNOWLEDGMENT_TEXT: 'A los fondos concursables de la Vicerrectoría de Acción Social. Silvia Lobo Cabezas y Alonso Quesada Hernández, Herbario Nacional. A todos los productores de café que nos permitieron muestrear sus fincas.',
+    ACKNOWLEDGMENT_TEXT: 'A los fondos concursables de la Vicerrectoría de Acción Social.\nSilvia Lobo Cabezas y Alonso Quesada Hernández, Herbario Nacional.\nA todos los productores de café que nos permitieron muestrear sus fincas.',
     CONTACT_TITLE: 'Contacto:',
-    CONTACT_TEXT: 'Correo: arvenses.eeafbm@ucr.ac.cr \nTeléfono: 2511-7778 \nPágina web: \nhttp://arvenses-eeafbm.ucr.ac.cr/index.php/es/ ',
+    CONTACT_TEXT: 'Correo: arvenses.eeafbm@ucr.ac.cr \nTeléfono: 2511-7778 \nPágina web: \n',
+    CONTACT_LINK: {
+        VALUE: 'arvenses-eeafbm.ucr.ac.cr/index.php/es/',
+        PREFIX: 'WEB'
+    },
     PROJECT_INFO: 'Proyecto de Acción Social ED-1816, Universidad de Costa Rica',
     BUTTON_TEXT: 'ACEPTAR'
 };
@@ -78,7 +85,10 @@ export const ADITIONAL_INFORMATION = {
 };
 
 // Texto que se muestra al abrir algún archivo adicional.
-export const DOWNLOAD = 'Descargando...';
+export const DOWNLOAD = {
+    TEXT: 'El archivo se ha descargado exitosamente.',
+    TOAST_TEXT: 'Descargando...',
+}
 
 /* Constantes correspondientes al texto mostrado en la pantalla de atributos de cada arvense. */
 export const ATTRIBUTES = {
@@ -97,7 +107,7 @@ export const GALERY_SEARCH = {
 export const GO_BACK = 'Volver';
 
 export const MISSING_INFORMATION = {
-    NAME: '¿Flores ausentes?',
+    NAME: 'Flores ausentes',
     CONTACT_Label: 'Contacto:',
     OPTIONS: [
         {
@@ -106,7 +116,7 @@ export const MISSING_INFORMATION = {
             INFORMATION: [
                 {
                     NAME: 'Mary Pamela Portuguez García',
-                    CONTACTS: ['mary.portuguez@ucr.ac.cr']
+                    CONTACTS: [{VALUE: 'mary.portuguez@ucr.ac.cr', PREFIX: 'MAIL'}]
                 }
             ]
             
@@ -117,14 +127,26 @@ export const MISSING_INFORMATION = {
             INFORMATION: [
                 {
                     NAME: 'Recepción Estación Experimental Agrícola Fabio Baudrit Moreno',
-                    CONTACTS: ['2511-7798', 'eeafbmrecepcion@ucr.ac.cr']
+                    CONTACTS: [
+                        {VALUE: '2511-7798', PREFIX: 'TEL'}, 
+                        {VALUE: 'eeafbmrecepcion@ucr.ac.cr', PREFIX: 'WEB'}
+                    ]
                 },
                 {
                     NAME: 'Mary Pamela Portuguez García',
-                    CONTACTS: ['2511-7778', 'mary.portuguez@ucr.ac.cr']
+                    CONTACTS: [
+                        {VALUE: '2511-7778', PREFIX: 'TEL'}, 
+                        {VALUE: 'mary.portuguez@ucr.ac.cr', PREFIX: 'MAIL'}
+                    ]
                 }
             ]
             
         }
     ]
+}
+
+export const CONTACT_PREFIX = {
+    MAIL: 'mailto:',
+    TEL: 'tel: +506 ',
+    WEB: 'http://'
 }

@@ -88,7 +88,7 @@ const TaxonomicCategory = ({navigation}) => {
             <View style = {styles.mainContent}>
                 <FlatList data = {categories}
                     renderItem = {({item}) => 
-                        <TouchableOpacity style = {styles.button} onPress = {() => navigation.navigate('TaxonomicSubCategory', {categoryId: item._id})}>
+                        <TouchableOpacity style = {styles.button} onPress = {() => navigation.navigate('TaxonomicSubCategory', {path: {categoryId: item._id, categoryName: item.value}})}>
                             <View style = {styles.imageContainer}>
                                 <Image source = {ICONS[0]} style = {styles.image} />
                             </View>
