@@ -1,6 +1,3 @@
-import { prefix } from "@fortawesome/free-regular-svg-icons";
-import { Text } from "react-native";
-
 /* Nombre de las pestañas correspondientes al menú principal. */
 export const SEARCH_TAB = {
     GALERY_NAME: 'Galería',
@@ -55,7 +52,6 @@ export const ABOUT_US = {
         PREFIX: 'WEB'
     },
     PROJECT_INFO: 'Proyecto de Acción Social ED-1816, Universidad de Costa Rica',
-    BUTTON_TEXT: 'ACEPTAR'
 };
 
 /* Constantes correspondientes al texto mostrado en la pantalla de ayuda. */
@@ -69,7 +65,6 @@ export const HELP = {
     TAXONOMY_TEXT: '\n\u2022 Use la columna de taxonomía para identificar una especie desconocida. De los atributos que se despliegan, recuerde que no tiene que seleccionarlos TODOS, sólo los que usted requiera. Empiece por el menú general. \n\n\u2022 Una vez se despliega un menú, se puede desplegar los submenús asociados. Si mantiene oprimido un ícono de menú o submenú, se despliegan definiciones sobre estos. \n\n\u2022 Cuando se oprime un atributo, se marca el mismo y se reduce el número de especies en la base de datos, cuando el número de especies restantes sea bajo, por ejemplo 4, oprima coincidencias, para desplegar las fotos. \n\n\u2022 Si oprime de nuevo un atributo, se borrará la respectiva marca, esto es útil, cuando se escogen por error. \n\n\u2022 Una vez escogido al menos un atributo, use el botón de “Ojo de Coincidencias”, en la parte inferior de la pantalla, para ver el número de especies.  Si conforme selecciona atributos sigue disminuyendo el número de especies, significa que los está escogiendo bien, si dicho número empieza a aumentar, el atributo seleccionado no corresponde con los otros que había escogido. \n\n\u2022 En el botón “+”, en la parte inferior de la pantalla puede revisar los ítems seleccionados, o limpiar las marcas e iniciar de nuevo.',
     MATCHING_OPTIONS_TITLE: 'Opción de coincidencias:',
     MATCHING_OPTIONS_TEXT: '\n Si los atributos que usted ha escogido reducen el número de especies remanentes a un número pequeño, y su arvense desconocida no está entre ellas, hay tres posibles razones: \n\n\t\t1. La especie no está en la base de datos. Se ha hecho un importante esfuerzo para incluir tantas arvenses de pastos cómo fue posible, pero con los años será necesario seguir añadiendo especies. \n\n\t\t2. Hay un error en los datos. Esto es posible, si descubre algún error, por favor contactar a arvenses.eeafbm@ucr.ac.cr \n\n\t\t3. Usted escogió un atributo incorrecto. Por favor vaya a menú "ítem seleccionados", para revisar las marcas que ha hecho. Puede revisar, eliminar o cambiar cualquiera de las marcas que ha hecho, directamente en esa pantalla.',
-    BUTTON_TEXT: 'ACEPTAR'
 };
 
 /**
@@ -86,7 +81,7 @@ export const ADITIONAL_INFORMATION = {
 
 // Texto que se muestra al abrir algún archivo adicional.
 export const DOWNLOAD = {
-    TEXT: 'El archivo se ha descargado exitosamente.',
+    TEXT: 'Se ha comenzado la descarga del archivo.',
     TOAST_TEXT: 'Descargando...',
 }
 
@@ -106,6 +101,7 @@ export const GALERY_SEARCH = {
 
 export const GO_BACK = 'Volver';
 
+/* Constantes correspondientes al texto mostrado en la pantalla de plantas ausentes. */
 export const MISSING_INFORMATION = {
     NAME: 'Flores ausentes',
     CONTACT_Label: 'Contacto:',
@@ -149,4 +145,18 @@ export const CONTACT_PREFIX = {
     MAIL: 'mailto:',
     TEL: 'tel: +506 ',
     WEB: 'http://'
+}
+
+/* Constantes correspondientes al texto mostrado en la barra de acciones taxonómicas. */
+export const TAXONOMY_ACTION_BAR_TEXT = {
+    MATCHES: 'Resultados: ',
+    MARKS: 'Marcas'
+} 
+
+/* Constantes correspondientes al texto mostrado en la pantalla del listado de marcas taxonómicas. */
+export const TAXONOMY_MARKS = {
+    ERASE: 'Eliminar',
+    ERASE_ALL: 'Borrar todas las marcas',
+    NO_MARKS_SELECTED: 'No hay marcas seleccionadas.',
+    MARKS_SELECTED_TITLE: 'Marcas Seleccionadas'
 }

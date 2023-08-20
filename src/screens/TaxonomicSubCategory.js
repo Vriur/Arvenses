@@ -4,6 +4,7 @@ import { openDatabase } from '../../database-service';
 import { AntDesign } from '@expo/vector-icons';
 import { MISSING_INFORMATION } from '../../Constants';
 import { ICONS } from '../assets/requireFiles/icons';
+import TaxonomyActionBar from '../components/molecules/TaxonomyActionBar';
 
 const styles = StyleSheet.create({
     container: {
@@ -100,6 +101,7 @@ const TaxonomicSubCategory = ({navigation, route}) => {
                     </TouchableOpacity>
                 }
             />
+            <TaxonomyActionBar navigation = {navigation} areResults = {false} />
         </View>
     );
 } 

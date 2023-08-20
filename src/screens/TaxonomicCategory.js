@@ -4,6 +4,7 @@ import { openDatabase } from '../../database-service';
 import { AntDesign } from '@expo/vector-icons';
 import { TAXONOMY_SEARCH_WARNING } from './../../Constants';
 import { ICONS } from './../assets/requireFiles/icons';
+import TaxonomyActionBar from '../components/molecules/TaxonomyActionBar';
 
 const styles = StyleSheet.create({
     container: {
@@ -94,11 +95,12 @@ const TaxonomicCategory = ({navigation}) => {
                             </View>
                             <Text style = {styles.buttonText}>{item.value}</Text>
                             <View style = {styles.spaceFiller} />
-                            <AntDesign name="right" size={24} color="#174c72" />
+                            <AntDesign name = 'right' size = {24} color = '#174c72' />
                         </TouchableOpacity>
                     }
                 />
             </View>
+            <TaxonomyActionBar navigation = {navigation} showBack = {false} />
         </View>
     );
 } 

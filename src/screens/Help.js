@@ -1,6 +1,6 @@
 import React from 'react';
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { APP, HELP } from '../../Constants';
+import { APP, GO_BACK, HELP } from '../../Constants';
 
 const styles = StyleSheet.create({
     container: {
@@ -27,10 +27,15 @@ const styles = StyleSheet.create({
     },
 
     button: {
-        backgroundColor: '#174c72',
         alignItems: 'center',
         justifyContent: 'center',
-        height: '8%'
+        backgroundColor: '#174c72',
+        height: '8%',
+    },
+
+    buttonText: {
+        color: 'white', 
+        fontSize: 16
     },
 
     title: {
@@ -46,7 +51,12 @@ const styles = StyleSheet.create({
         fontSize: 20,
         marginHorizontal: '4%',
         marginTop: '5%',
-        backgroundColor: '#41ade7'
+        paddingVertical: 4,
+        paddingHorizontal: 10,
+        backgroundColor: '#41ade7',
+        borderWidth: 1,
+        borderRadius: 20,
+        borderColor: '#41ade7',
     },
 
     genericText: {
@@ -76,7 +86,7 @@ const Help = ({navigation}) => {
                 <Text style = {[styles.genericText, {marginBottom: '5%'}]}>{HELP.MATCHING_OPTIONS_TEXT}</Text>
             </ScrollView>
             <TouchableOpacity style = {styles.button} onPress={() => navigation.navigate('SearchMenu')}>
-                <Text style = {{color: 'white'}}>{HELP.BUTTON_TEXT}</Text>
+                <Text style = {styles.buttonText}>{GO_BACK}</Text>
             </TouchableOpacity>
         </View>
     );

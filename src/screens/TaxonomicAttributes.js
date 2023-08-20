@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import BouncyCheckbox from "react-native-bouncy-checkbox";
 import { openDatabase } from '../../database-service';
 import { AntDesign } from '@expo/vector-icons';
 import { ICONS } from './../assets/requireFiles/icons';
+import BouncyCheckbox from "react-native-bouncy-checkbox";
+import TaxonomyActionBar from '../components/molecules/TaxonomyActionBar';
 
 const styles = StyleSheet.create({
     container: {
@@ -150,51 +151,54 @@ const TaxonomicAttributes = ({navigation, route}) => {
     }
 
     return(
-        <ScrollView style = {styles.container}>
-            <Text style = {styles.path}>{`${path.categoryName}/ ${path.subCategoryName}/`}</Text>
-            { 
-                /* Mapeo correspondiente a los atributos del arvense. */
-                Object.keys(attributes).map(item => {
-                    return (
-                        <View key = {item}>
-                            <TouchableOpacity key = {item} style = {attributes[item]['showOptions'] ? styles.button : [styles.button, styles.buttonWithoutOptions]} onPress = {() => handleShowOptions(item)}>
-                                <TouchableOpacity style = {styles.imageContainer} onLongPress = {() => navigation.navigate('TaxonomicIconInformation', {id: item, name: attributes[item]['attribute_name'], description: attributes[item]['attribute_description']})}>
-                                    <Image source = {ICONS[0]} style = {styles.image} />
+        <View style = {styles.container}>
+            <ScrollView style = {styles.container}>
+                <Text style = {styles.path}>{`${path.categoryName}/ ${path.subCategoryName}/`}</Text>
+                { 
+                    /* Mapeo correspondiente a los atributos del arvense. */
+                    Object.keys(attributes).map(item => {
+                        return (
+                            <View key = {item}>
+                                <TouchableOpacity key = {item} style = {attributes[item]['showOptions'] ? styles.button : [styles.button, styles.buttonWithoutOptions]} onPress = {() => handleShowOptions(item)}>
+                                    <TouchableOpacity style = {styles.imageContainer} onLongPress = {() => navigation.navigate('TaxonomicIconInformation', {id: item, name: attributes[item]['attribute_name'], description: attributes[item]['attribute_description']})}>
+                                        <Image source = {ICONS[0]} style = {styles.image} />
+                                    </TouchableOpacity>
+                                    <Text style = {styles.buttonText}>{attributes[item]['attribute_name']}</Text>
+                                    <View style = {styles.spaceFiller} />
+                                    <AntDesign name="down" size={24} color="#174c72" />
                                 </TouchableOpacity>
-                                <Text style = {styles.buttonText}>{attributes[item]['attribute_name']}</Text>
-                                <View style = {styles.spaceFiller} />
-                                <AntDesign name="down" size={24} color="#174c72" />
-                            </TouchableOpacity>
 
-                            {
-                                attributes[item]['showOptions'] &&
-                                <View key = {`${item}_options`} style = {styles.optionsContainer}>
-                                    {
-                                        /* Mapeo correspondiente a las opciones de cada atributo. */    
-                                        attributes[item]['options'].map(option => {
-                                            return (
-                                                <View key = {`${item}_${option['attribute_option_id']}`} style = {styles.optionButton}>
-                                                    <TouchableOpacity style = {styles.optionImageContainer} onLongPress = {() => navigation.navigate('TaxonomicIconInformation', {id: option['attribute_option_id'], name: option['attribute_option_name'], description: option['attribute_option_description']})}>
-                                                        <Image source = {ICONS[0]} style = {styles.image} />
-                                                    </TouchableOpacity>
-                                                    <Text style = {styles.optionButtonText}>{option['attribute_option_name']}</Text>
-                                                    <View style = {styles.spaceFiller} />
-                                                    <BouncyCheckbox 
-                                                        size = {30} 
-                                                        fillColor = '#174c72' 
-                                                        onPress = {(isChecked) => {isChecked = !isChecked}} 
-                                                    />
-                                                </View>
-                                            )
-                                        })
-                                    }
-                                </View>
-                            }   
-                        </View>             
-                    );
-                })
-            }
-        </ScrollView>
+                                {
+                                    attributes[item]['showOptions'] &&
+                                    <View key = {`${item}_options`} style = {styles.optionsContainer}>
+                                        {
+                                            /* Mapeo correspondiente a las opciones de cada atributo. */    
+                                            attributes[item]['options'].map(option => {
+                                                return (
+                                                    <View key = {`${item}_${option['attribute_option_id']}`} style = {styles.optionButton}>
+                                                        <TouchableOpacity style = {styles.optionImageContainer} onLongPress = {() => navigation.navigate('TaxonomicIconInformation', {id: option['attribute_option_id'], name: option['attribute_option_name'], description: option['attribute_option_description']})}>
+                                                            <Image source = {ICONS[0]} style = {styles.image} />
+                                                        </TouchableOpacity>
+                                                        <Text style = {styles.optionButtonText}>{option['attribute_option_name']}</Text>
+                                                        <View style = {styles.spaceFiller} />
+                                                        <BouncyCheckbox 
+                                                            size = {30} 
+                                                            fillColor = '#174c72' 
+                                                            onPress = {(isChecked) => {isChecked = !isChecked}} 
+                                                        />
+                                                    </View>
+                                                )
+                                            })
+                                        }
+                                    </View>
+                                }   
+                            </View>             
+                        );
+                    })
+                }
+            </ScrollView>
+            <TaxonomyActionBar navigation = {navigation} />
+        </View>
     );
 } 
 

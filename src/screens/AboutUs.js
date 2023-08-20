@@ -1,6 +1,6 @@
 import React from 'react';
 import { Linking, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { ABOUT_US, APP, CONTACT_PREFIX } from '../../Constants';
+import { ABOUT_US, APP, CONTACT_PREFIX, GO_BACK } from '../../Constants';
 
 const styles = StyleSheet.create({
     container: {
@@ -38,12 +38,22 @@ const styles = StyleSheet.create({
         height: '8%'
     },
 
+    buttonText: {
+        color: 'white',
+        fontSize: 16
+    },
+
     genericTitle:{
         color: 'white',
         fontSize: 20,
         marginHorizontal: '4%',
         marginTop: '5%',
-        backgroundColor: '#41ade7'
+        paddingVertical: 4,
+        paddingHorizontal: 10,
+        backgroundColor: '#41ade7',
+        borderWidth: 1,
+        borderRadius: 20,
+        borderColor: '#41ade7',
     },
 
     genericText: {
@@ -77,7 +87,7 @@ const AboutUs = ({navigation}) => {
                 <Text style = {[styles.genericTitle, {marginBottom: '5%'}]}>{ABOUT_US.PROJECT_INFO}</Text>
             </ScrollView>
             <TouchableOpacity style = {styles.button} onPress={() => navigation.navigate('SearchMenu')}>
-                <Text style = {{color: 'white'}}>{ABOUT_US.BUTTON_TEXT}</Text>
+                <Text style = {styles.buttonText}>{GO_BACK}</Text>
             </TouchableOpacity>
         </View>
     );
