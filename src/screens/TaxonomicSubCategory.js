@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { openDatabase } from '../../database-service';
 import { AntDesign } from '@expo/vector-icons';
-import { MISSING_INFORMATION } from '../../Constants';
+import { TAXONOMIC_FLOWER_ID } from '../../Constants';
 import { ICONS } from '../assets/requireFiles/icons';
 import TaxonomyActionBar from '../components/molecules/TaxonomyActionBar';
 
@@ -76,26 +76,25 @@ const TaxonomicSubCategory = ({navigation, route}) => {
         fetchData();
     }, [path.categoryId]);
 
+    const handlePressSubCategory = (item) => {
+        if(item._id !== TAXONOMIC_FLOWER_ID){
+            navigation.navigate('TaxonomicAttributes', {path: {...path, subCategoryId: item._id, subCategoryName: item.name}});
+        }
+        else{
+            navigation.navigate('TaxonomicFlowerCategories', {path: {...path, subCategoryId: item._id, subCategoryName: item.name}, item: item});
+        }
+    }
+
     return(
         <View style = {styles.container}>
             <Text style = {styles.path}>{`${path.categoryName}/`}</Text>
             <FlatList data = {subCategories}
                 renderItem = {({item}) => 
-                    <TouchableOpacity style = {styles.button} onPress = {() => navigation.navigate('TaxonomicAttributes', {path: {...path, subCategoryId: item._id, subCategoryName: item.name}})}>
+                    <TouchableOpacity style = {styles.button} onPress = {() => handlePressSubCategory(item)}>
                         <TouchableOpacity style = {styles.imageContainer} onLongPress = {() => navigation.navigate('TaxonomicIconInformation', {id: item._id, name: item.name, description: item.description})}>
                             <Image source = {ICONS[0]} style = {styles.image} />
                         </TouchableOpacity>
                         <Text style = {styles.buttonText}>{item.name}</Text>
-                        <View style = {styles.spaceFiller} />
-                        <AntDesign name="right" size={24} color="#174c72" />
-                    </TouchableOpacity>
-                }
-                ListFooterComponent = {
-                    <TouchableOpacity style = {styles.button} onPress = {() => navigation.navigate('TaxonomicMissingInformation')}>
-                        <View style = {styles.imageContainer}>
-                            <Image source = {ICONS[0]} style = {styles.image} />
-                        </View>
-                        <Text style = {styles.buttonText}>{MISSING_INFORMATION.NAME}</Text>
                         <View style = {styles.spaceFiller} />
                         <AntDesign name="right" size={24} color="#174c72" />
                     </TouchableOpacity>

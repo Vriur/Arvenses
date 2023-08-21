@@ -160,3 +160,10 @@ export const TAXONOMY_MARKS = {
     NO_MARKS_SELECTED: 'No hay marcas seleccionadas.',
     MARKS_SELECTED_TITLE: 'Marcas Seleccionadas'
 }
+
+/* Constante que indica el id correspondiente a la categoría flores. Esto con el fin de mostrar el menú extra,
+   es decir, flores presentes y flores ausentes. */
+export const TAXONOMIC_FLOWER_ID = 8;
+
+/* Constante correspondiente al texto mostrado en el botón correspondiente a flores presentes. */
+export const PRESENT_FLOWER_TEXT = 'Flores Presentes';
