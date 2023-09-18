@@ -100,7 +100,7 @@ const TaxonomicSubCategory = ({navigation, route}) => {
                     </TouchableOpacity>
                 }
             />
-            <TaxonomyActionBar navigation = {navigation} areResults = {false} />
+            <TaxonomyActionBar navigation = {navigation} />
         </View>
     );
 } 

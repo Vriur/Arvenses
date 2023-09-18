@@ -78,7 +78,7 @@ const TaxonomyFlowerCategories = ({navigation, route}) => {
                 </TouchableOpacity>
             </>
             <View style = {styles.spaceFiller} />
-            <TaxonomyActionBar navigation = {navigation} areResults = {false} />
+            <TaxonomyActionBar navigation = {navigation} />
         </View>
     );
 } 

@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { openDatabase } from '../../database-service';
 import { AntDesign } from '@expo/vector-icons';
 import { ICONS } from './../assets/requireFiles/icons';
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 import TaxonomyActionBar from '../components/molecules/TaxonomyActionBar';
+import { AddTaxonomicOption, DeleteTaxonomicOption } from '../redux/TaxonomicOptionsSlice';
 
 const styles = StyleSheet.create({
     container: {
@@ -94,6 +96,8 @@ const styles = StyleSheet.create({
 });
 
 const TaxonomicAttributes = ({navigation, route}) => {
+    const dispatch = useDispatch();
+    const checkedOptions = useSelector((state) => state.taxonomicOptions);
     const path = route.params.path;
     const [attributes, setAttributes] = useState([]);
     
@@ -150,6 +154,19 @@ const TaxonomicAttributes = ({navigation, route}) => {
         setAttributes(newAttributes);
     }
 
+    const handleCheckOption = (isChecked, optionSelected) => {
+        if(isChecked){
+            dispatch(AddTaxonomicOption(optionSelected));
+        }
+        else{
+            dispatch(DeleteTaxonomicOption(optionSelected.route));
+        }
+    }
+
+    const mustCheckOption = (route) => {
+        return !!checkedOptions.filter((item) => item.route === route).length;
+    }
+
     return(
         <View style = {styles.container}>
             <ScrollView style = {styles.container}>
@@ -184,7 +201,17 @@ const TaxonomicAttributes = ({navigation, route}) => {
                                                         <BouncyCheckbox 
                                                             size = {30} 
                                                             fillColor = '#174c72' 
-                                                            onPress = {(isChecked) => {isChecked = !isChecked}} 
+                                                            isChecked = {mustCheckOption(`${path.categoryName}/ ${path.subCategoryName} / ${attributes[item]['attribute_name']}: ${option['attribute_option_name']}`)}
+                                                            onPress = {(isChecked) => {
+                                                                handleCheckOption(isChecked,
+                                                                    {
+                                                                        categoryId: path.categoryId,
+                                                                        subCategoryId: path.subCategoryId,
+                                                                        attributeId: item,
+                                                                        optionId: option['attribute_option_id'],
+                                                                        route: `${path.categoryName}/ ${path.subCategoryName} / ${attributes[item]['attribute_name']}: ${option['attribute_option_name']}`
+                                                                    })
+                                                                isChecked = !isChecked}} 
                                                         />
                                                     </View>
                                                 )

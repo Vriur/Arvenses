@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import { GO_BACK, TAXONOMY_ACTION_BAR_TEXT } from './../../../Constants';
@@ -33,27 +34,30 @@ const styles = StyleSheet.create({
     }
 });
 
-const TaxonomyActionBar = ({navigation, showBack = true, areResults = true}) => {
+const TaxonomyActionBar = ({navigation, showBack = true}) => {
+    let areResults = !!useSelector((state) => state.taxonomicOptions).length;
+
     return(
         <View style = {styles.actionButtonsContainer}>
             {
                 showBack &&
                 <>
+                    <View style = {styles.spaceFiller} />
                     <TouchableOpacity style = {styles.actionButton} onPress = {() => navigation.goBack()}>
                         <AntDesign name = 'back' size = {26} color = 'white' />
                         <Text style = {styles.actionButtonText}>{GO_BACK}</Text>
                     </TouchableOpacity>
                 </>
             }
+            <View style = {styles.spaceFiller} />
+                <TouchableOpacity style = {styles.actionButton}>
+                    <AntDesign name = 'eyeo' size = {26} color = 'white' />
+                    <Text style = {styles.actionButtonText}>{`${TAXONOMY_ACTION_BAR_TEXT.MATCHES}10`}</Text>
+                </TouchableOpacity>
+            <View style = {styles.spaceFiller} />
             {
                 areResults &&
                 <>
-                    <View style = {styles.spaceFiller} />
-                    <TouchableOpacity style = {styles.actionButton}>
-                        <AntDesign name = 'eyeo' size = {26} color = 'white' />
-                        <Text style = {styles.actionButtonText}>{`${TAXONOMY_ACTION_BAR_TEXT.MATCHES}10`}</Text>
-                    </TouchableOpacity>
-                    <View style = {styles.spaceFiller} />
                     <TouchableOpacity style = {styles.actionButton} onPress = {() => navigation.navigate('TaxonomicMarks')}>
                         <AntDesign name = 'plus' size = {26} color = 'white' />
                         <Text style = {styles.actionButtonText}>{TAXONOMY_ACTION_BAR_TEXT.MARKS}</Text>

@@ -1,4 +1,6 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { DeleteAllTaxonomicOptions, DeleteTaxonomicOption } from '../redux/TaxonomicOptionsSlice';
 import { FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { FontAwesome5 } from '@expo/vector-icons'; 
 import { MaterialCommunityIcons } from '@expo/vector-icons'; 
@@ -105,17 +107,9 @@ const styles = StyleSheet.create({
 });
 
 const TaxonomicMarks = ({navigation: {goBack}}) => {
-    const tempMarkList = [
-        'Hoja / General / Espinas / 1',
-        'Hoja / General / Espinas / 2', 
-        'Hoja / General / Espinas / 3', 
-        'Hoja / General / Espinas / 4',
-        'Hoja / General / Espinas / 1',
-        'Hoja / General / Espinas / 2', 
-        'Hoja / General / Espinas / 3', 
-        'Hoja / General / Espinas / 4',
-    ];
-    const areMarks = true;
+    const dispatch = useDispatch();
+    const markList = useSelector((state) => state.taxonomicOptions);
+    const areMarks = markList.length;
 
     return(
         <View style = {styles.container}>
@@ -123,19 +117,19 @@ const TaxonomicMarks = ({navigation: {goBack}}) => {
             {
                 areMarks ?
                 <>
-                    <FlatList data = {tempMarkList}
+                    <FlatList data = {markList}
                         renderItem = {({item}) => 
                             <View style = {styles.markContainer}>
-                                <Text style = {styles.markText}>{item}</Text>
+                                <Text style = {styles.markText}>{item.route}</Text>
                                 <View style = {styles.spaceFiller} />
-                                <TouchableOpacity style = {styles.markDeleteButton} onPress = {() => console.log('Falta')}>
+                                <TouchableOpacity style = {styles.markDeleteButton} onPress = {() => dispatch(DeleteTaxonomicOption(item.route))}>
                                     <FontAwesome5 name = 'trash' size = {24} color = 'white' />
                                     <Text style = {styles.markDeleteButtonText}>{TAXONOMY_MARKS.ERASE}</Text>
                                 </TouchableOpacity>
                             </View>
                         }
                     />
-                    <TouchableOpacity style = {styles.eraseAllButton} onPress = {() => console.log('Falta')}>
+                    <TouchableOpacity style = {styles.eraseAllButton} onPress = {() => dispatch(DeleteAllTaxonomicOptions())}>
                         <Text style = {styles.textButton}>{TAXONOMY_MARKS.ERASE_ALL}</Text>
                     </TouchableOpacity>
                 </>

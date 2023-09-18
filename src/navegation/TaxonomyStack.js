@@ -12,7 +12,7 @@ const TaxonomyStack = createNativeStackNavigator();
 
 const NavigationTaxonomyStack = () => {
   return (
-    <TaxonomyStack.Navigator screenOptions = {{headerShown: false}}>
+    <TaxonomyStack.Navigator screenOptions = {{headerShown: false, animation: 'none'}}>
       <TaxonomyStack.Screen name = 'TaxonomicCategory' component = {TaxonomyCategory} />
       <TaxonomyStack.Screen name = 'TaxonomicSubCategory' component = {TaxonomySubCategory} />
       <TaxonomyStack.Screen name = 'TaxonomicFlowerCategories' component = {TaxonomyFlowerCategories} />
