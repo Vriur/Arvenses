@@ -106,10 +106,24 @@ const styles = StyleSheet.create({
     },
 });
 
-const TaxonomicMarks = ({navigation: {goBack}}) => {
+const TaxonomicMarks = ({navigation}) => {
     const dispatch = useDispatch();
     const markList = useSelector((state) => state.taxonomicOptions);
     const areMarks = markList.length;
+
+    const handleDelete = (route) => {
+        dispatch(DeleteTaxonomicOption(route)); 
+        modifyRoute();
+    }
+
+    const handleDeleteAll = () => {
+        dispatch(DeleteAllTaxonomicOptions());
+        modifyRoute();
+    }
+    
+    const modifyRoute = () => {
+        navigation.reset({index: 0, routes: [{name: 'TaxonomicCategory'}, {name: 'TaxonomicMarks'}]});
+    }
 
     return(
         <View style = {styles.container}>
@@ -122,14 +136,14 @@ const TaxonomicMarks = ({navigation: {goBack}}) => {
                             <View style = {styles.markContainer}>
                                 <Text style = {styles.markText}>{item.route}</Text>
                                 <View style = {styles.spaceFiller} />
-                                <TouchableOpacity style = {styles.markDeleteButton} onPress = {() => dispatch(DeleteTaxonomicOption(item.route))}>
+                                <TouchableOpacity style = {styles.markDeleteButton} onPress = {() => handleDelete(item.route)}>
                                     <FontAwesome5 name = 'trash' size = {24} color = 'white' />
                                     <Text style = {styles.markDeleteButtonText}>{TAXONOMY_MARKS.ERASE}</Text>
                                 </TouchableOpacity>
                             </View>
                         }
                     />
-                    <TouchableOpacity style = {styles.eraseAllButton} onPress = {() => dispatch(DeleteAllTaxonomicOptions())}>
+                    <TouchableOpacity style = {styles.eraseAllButton} onPress = {() => handleDeleteAll()}>
                         <Text style = {styles.textButton}>{TAXONOMY_MARKS.ERASE_ALL}</Text>
                     </TouchableOpacity>
                 </>
@@ -138,7 +152,7 @@ const TaxonomicMarks = ({navigation: {goBack}}) => {
                     <Text style = {styles.noMarkFindText}>{TAXONOMY_MARKS.NO_MARKS_SELECTED}</Text>
                 </View>
             }
-            <TouchableOpacity style = {styles.button} onPress = {() => goBack()}>
+            <TouchableOpacity style = {styles.button} onPress = {() => navigation.goBack()}>
                 <Text style = {styles.textButton}>{GO_BACK}</Text>
             </TouchableOpacity>
         </View>
