@@ -36,7 +36,7 @@ const AditionalInformation = ({navigation}) => {
         <View style = {styles.container}>
             <FlatList data = {ADITIONAL_INFORMATION.BUTTONS}
                 renderItem = {({item}) => 
-                    <TouchableOpacity style = {styles.button} onPress = {() => navigation.navigate('PdfReader')}>
+                    <TouchableOpacity style = {styles.button} onPress = {() => navigation.navigate('PdfReader', {url: item.DOWNLOADABLE_FILE})}>
                         <Text style = {styles.buttonText}>{item.TEXT}</Text>
                         <View style = {styles.spaceFiller} />
                         <AntDesign name = 'download' size = {30} color = '#174c72' />

@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { Image, ImageBackground, Modal, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Image, ImageBackground, Modal, StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { APP, HOME } from '../../Constants';
-import BackgroundImg from './../assets/icons/img_inicio.jpg';
-import FabioIcon from './../assets/icons/fabio_icon.png';
-import UCRIcon from './../assets/icons/ucr_icon.png';
+import BackgroundImg from './../assets/app_images/img_inicio.jpg';
+import FabioIcon from './../assets/app_images/fabio_icon.png';
+import UCRIcon from './../assets/app_images/ucr_icon.png';
 
 const styles = StyleSheet.create({
     container: {
@@ -47,8 +48,7 @@ const styles = StyleSheet.create({
 
     appInfoText: {
         textAlign: 'center',
-        color: '#174c72',
-        textShadowColor: 'white', 
+        color: 'white',
         textShadowOffset: { width: 0, height: 0 },
         textShadowRadius: 10,
         fontSize: 30,
@@ -116,7 +116,8 @@ const styles = StyleSheet.create({
 const Home = ({navigation}) => {
     const [modalVisible, setModalVisible] = useState(true);
     return(
-        <View style = {styles.container}>
+        <SafeAreaView style = {styles.container}>
+            <StatusBar backgroundColor = '#174c72'/>
             <ImageBackground source = {BackgroundImg} style = {styles.backgroundImg} resizeMode = 'cover' >
                 <View style = {styles.icons}>
                     <Image source = {UCRIcon} style = {styles.icon} />
@@ -142,7 +143,7 @@ const Home = ({navigation}) => {
                     </View>
                 </View>
             </Modal>
-        </View>
+        </SafeAreaView>
     );
 } 
 

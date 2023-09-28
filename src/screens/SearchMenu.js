@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import SearchTab from '../navegation/SearchTab';
 import MainBar from './../components/MainBar';
@@ -31,6 +31,7 @@ const styles = StyleSheet.create({
 const SearchMenu = ({navigation}) => {
     return(
         <SafeAreaView style = {styles.container}>
+            <StatusBar backgroundColor = '#174c72'/>
             <MainBar navigation = {navigation} containerStyle = {styles.header} />
             <View style = {styles.mainContent}>
                 <SearchTab navigation = {navigation} />

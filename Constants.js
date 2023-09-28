@@ -40,7 +40,7 @@ export const ABOUT_US = {
     AUTHORS_TITLE: 'Autores:',
     AUTHORS_TEXT: 'Mary Pamela Portuguez García, Renán Agüero Alvarado, Steven Brenes Prendas y Adolfo Soto Aguilar.',
     PROGRAMMERS_TITLE: 'Programadores:',
-    PROGRAMMERS_TEXT: 'Nathan Gonzáles Herrera y María Obregón Coto.',
+    PROGRAMMERS_TEXT: 'Nathan Gonzáles Herrera.',
     GRAPHIC_DESIGNERS_TITLE: 'Diseñadores Gráficos:',
     GRAPHIC_DESIGNERS_TEXT: 'Evelin Naranjo Madrigal, Jasmín Ortega Gutiérrez y Kevin Amador Navarro.',
     ACKNOWLEDGMENT_TITLE: 'Agradecimiento:',
@@ -74,8 +74,8 @@ export const HELP = {
  */
 export const ADITIONAL_INFORMATION = {
     BUTTONS: [
-        {TEXT: 'Descargar Información Adicional', DOWNLOADABLE_FILE: 'pi'},
-        {TEXT: 'Descargar Referencias', DOWNLOADABLE_FILE: 'pai'},
+        {TEXT: 'Descargar Referencias', DOWNLOADABLE_FILE: require('./src/assets/files/1.pdf')},
+        {TEXT: 'Descargar Información Adicional', DOWNLOADABLE_FILE: require('./src/assets/files/2.pdf')},
     ]
 };
 

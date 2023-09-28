@@ -3,7 +3,7 @@ import { Image, StyleSheet, Text, View } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
 import { Menu, MenuOptions, MenuOption, MenuTrigger } from 'react-native-popup-menu';
-import AppIcon from './../assets/icons/app_icon.png';
+import AppIcon from './../assets/app_images/app_icon_white.png';
 import { APP, MAIN_BAR } from '../../Constants';
 
 const styles = StyleSheet.create({

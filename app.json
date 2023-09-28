@@ -1,16 +1,11 @@
 {
   "expo": {
-    "name": "Arvenses",
+    "name": "cafearvenses",
     "slug": "arvenses",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./src/assets/icons/app_icon.png",
+    "icon": "./src/assets/app_images/app_icon_black.png",
     "userInterfaceStyle": "light",
-    "splash": {
-      "image": "./src/assets/icons/img_inicio.jpg",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
     "updates": {
       "fallbackToCacheTimeout": 0
     },
@@ -22,13 +17,15 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./src/assets/icons/app_icon.png",
+        "foregroundImage": "./src/assets/app_images/app_icon_black.png",
         "backgroundColor": "#FFFFFF"
       },
-      "softwareKeyboardLayoutMode":"pan"
+      "softwareKeyboardLayoutMode": "pan",
+      "package": "com.vriur04.arvenses",
+      "permissions": ["STATUS_BAR", "INTERNET", "MANAGE_EXTERNAL_STORAGE", "WRITE_EXTERNAL_STORAGE"]
     },
     "web": {
-      "favicon": "./src/assets/icons/app_icon.png"
+      "favicon": "./src/assets/app_images/app_icon_black.png"
     },
     "extra": {
       "eas": {

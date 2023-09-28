@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StatusBar, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import ResultBar from '../components/molecules/ResultBar';
 import ResultTab from '../navegation/ResultTab';
@@ -31,6 +31,7 @@ const styles = StyleSheet.create({
 const ResultMenu = ({route, navigation}) => {
     return(
         <SafeAreaView style = {styles.container}>
+            <StatusBar backgroundColor = '#174c72'/>
             <ResultBar containerStyle = {styles.header} name = {route.params.itemData.scientificName} navigation = {navigation} />
             <View style = {styles.mainContent}>
                 <ResultTab itemData = {route.params.itemData} />

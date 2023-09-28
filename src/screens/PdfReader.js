@@ -1,69 +1,52 @@
 import React from 'react';
-import { Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import * as FileSystem from 'expo-file-system';
+import * as IntentLauncher from 'expo-intent-launcher';
+import { Asset } from 'expo-asset';
+import { Platform, StyleSheet } from 'react-native';
 import { WebView } from 'react-native-webview';
-import { DOWNLOAD, GO_BACK } from '../../Constants';
-import { Feather } from '@expo/vector-icons'; 
+import { DOWNLOAD } from '../../Constants';
 import Constants from 'expo-constants';
 
-const PdfReader = ({navigation: {goBack}}) => {
-    const styles = StyleSheet.create({
-        mainContent: {
-            flex: 50,
-            backgroundColor: '#fff',
-            alignItems: 'center',
-            justifyContent: 'center',
-            marginTop: Constants.statusBarHeight,
-        },
+const styles = StyleSheet.create({
+    mainContent: {
+        flex: 50,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginTop: Constants.statusBarHeight,
+    },
+});
 
-        hideContent: {
-            flex: 1,
-        },
+const PdfReader = ({route, navigation: {goBack}}) => {
+    const url = route.params.url;
+    const showFile = async () => {
+        const [{ localUri }] = await Asset.loadAsync(url);
+        FileSystem.getContentUriAsync(localUri).then(contentUri => {
+            IntentLauncher.startActivityAsync('android.intent.action.VIEW', {
+                data: contentUri,
+                flags: 1,
+            }).then(result => {
+                if(result.resultCode === 0){
+                    goBack();
+                }
+            });
+        });
+    }
 
-        button: {
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'center',
-            height: 80,
-            padding: '2%',
-            width: '94%',
-            borderRadius: 20,
-            borderColor: '#174c72',
-            backgroundColor: '#174c72',
-            borderWidth: 1,
-        },
-    
-        textButton: {
-            color: 'white',
-            fontSize: 16
-        },
-
-        downloadText: {
-            fontSize: 20,
-            color: '#174c72',
-            textAlign: 'center',
-            maxWidth: '94%',
-            marginTop: '2%',
-            marginBottom: '5%'
-        }
-    });
+    if(Platform.OS === 'android'){
+        showFile();
+    }
 
     return(
         <>
-            <WebView 
-                source = {require('./../assets/files/1.pdf')} 
-                downloadingMessage = {DOWNLOAD.TOAST_TEXT}
-                style = {Platform.OS === 'android' ? styles.mainContent : styles.hideContent} 
-            />
-            
             {
-                Platform.OS === 'android' ?
-                <View style = {styles.mainContent}>
-                    <Feather name = 'download' size = {40} color = '#174c72' />
-                    <Text style = {styles.downloadText}>{DOWNLOAD.TEXT}</Text>
-                    <TouchableOpacity style = {styles.button} onPress = {() => goBack()}>
-                        <Text style = {styles.textButton}>{GO_BACK}</Text>
-                    </TouchableOpacity>
-                </View>
+                Platform.OS === 'ios' ?
+                    <WebView 
+                        source = {url} 
+                        downloadingMessage = {DOWNLOAD.TOAST_TEXT}
+                        allowFileAccess = {true}
+                        style = {styles.mainContent} 
+                    />
                 : null
             }
         </>
