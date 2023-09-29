@@ -61,8 +61,9 @@ const TaxonomyFlowerCategories = ({navigation, route}) => {
             <Text style = {styles.path}>{`${path.categoryName}/ ${path.subCategoryName}`}</Text>
             <>
                 <TouchableOpacity style = {styles.button} onPress = {() => navigation.navigate('TaxonomicAttributes', {path: {...path, subCategoryId: item._id, subCategoryName: `${item.name}/ Flores Presentes`}})}>
-                    <TouchableOpacity style = {styles.imageContainer} onLongPress = {() => navigation.navigate('TaxonomicIconInformation', {id: item._id, name: item.name, description: item.description})}>
-                        <Image source = {ICONS[0]} style = {styles.image} />
+                    <TouchableOpacity style = {styles.imageContainer} onLongPress = {() => navigation.navigate('TaxonomicIconInformation', {image: ICONS['attribute_category'][8], name: item.name, description: item.description})}>
+                        {/* El atributo de flores presentes es el mismo que el de flores, id = 8. */}
+                        <Image source = {ICONS['attribute_category'][8]} style = {styles.image} />
                     </TouchableOpacity>
                     <Text style = {styles.buttonText}>{PRESENT_FLOWER_TEXT}</Text>
                     <View style = {styles.spaceFiller} />
@@ -70,7 +71,7 @@ const TaxonomyFlowerCategories = ({navigation, route}) => {
                 </TouchableOpacity>
                 <TouchableOpacity style = {styles.button} onPress = {() => navigation.navigate('TaxonomicMissingInformation')}>
                     <View style = {styles.imageContainer}>
-                        <Image source = {ICONS[0]} style = {styles.image} />
+                        <Image source = {ICONS['attribute_category']['Sin Flores']} style = {styles.image} />
                     </View>
                     <Text style = {styles.buttonText}>{MISSING_INFORMATION.NAME}</Text>
                     <View style = {styles.spaceFiller} />

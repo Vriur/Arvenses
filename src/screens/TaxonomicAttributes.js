@@ -177,8 +177,8 @@ const TaxonomicAttributes = ({navigation, route}) => {
                         return (
                             <View key = {item}>
                                 <TouchableOpacity key = {item} style = {attributes[item]['showOptions'] ? styles.button : [styles.button, styles.buttonWithoutOptions]} onPress = {() => handleShowOptions(item)}>
-                                    <TouchableOpacity style = {styles.imageContainer} onLongPress = {() => navigation.navigate('TaxonomicIconInformation', {id: item, name: attributes[item]['attribute_name'], description: attributes[item]['attribute_description']})}>
-                                        <Image source = {ICONS[0]} style = {styles.image} />
+                                    <TouchableOpacity style = {styles.imageContainer} onLongPress = {() => navigation.navigate('TaxonomicIconInformation', {image: ICONS['attribute_category'][item], name: attributes[item]['attribute_name'], description: attributes[item]['attribute_description']})}>
+                                        <Image source = {ICONS['attribute_category'][item]} style = {styles.image} />
                                     </TouchableOpacity>
                                     <Text style = {styles.buttonText}>{attributes[item]['attribute_name']}</Text>
                                     <View style = {styles.spaceFiller} />
@@ -193,8 +193,8 @@ const TaxonomicAttributes = ({navigation, route}) => {
                                             attributes[item]['options'].map(option => {
                                                 return (
                                                     <View key = {`${item}_${option['attribute_option_id']}`} style = {styles.optionButton}>
-                                                        <TouchableOpacity style = {styles.optionImageContainer} onLongPress = {() => navigation.navigate('TaxonomicIconInformation', {id: option['attribute_option_id'], name: option['attribute_option_name'], description: option['attribute_option_description']})}>
-                                                            <Image source = {ICONS[0]} style = {styles.image} />
+                                                        <TouchableOpacity style = {styles.optionImageContainer} onLongPress = {() => navigation.navigate('TaxonomicIconInformation', {image: ICONS['attribute'][option['attribute_option_id']], name: option['attribute_option_name'], description: option['attribute_option_description']})}>
+                                                            <Image source = {ICONS['attribute'][option['attribute_option_id']]} style = {styles.image} />
                                                         </TouchableOpacity>
                                                         <Text style = {styles.optionButtonText}>{option['attribute_option_name']}</Text>
                                                         <View style = {styles.spaceFiller} />

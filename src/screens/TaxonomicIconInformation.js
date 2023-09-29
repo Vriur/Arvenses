@@ -1,7 +1,6 @@
 import React from 'react';
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { GO_BACK } from '../../Constants';
-import { ICONS } from './../assets/requireFiles/icons';
 
 const styles = StyleSheet.create({
     container: {
@@ -65,14 +64,14 @@ const styles = StyleSheet.create({
 });
 
 const TaxonomicIconInformation = ({route, navigation: {goBack}}) => {
-    const id = route.params.id;
+    const image = route.params.image;
     const name = route.params.name;
     const description = route.params.description;
 
     return(
         <View style = {styles.container}>
             <View style = {styles.imageContainer}>
-                <Image source = {ICONS[0]} style = {styles.image} />
+                <Image source = {image} style = {styles.image} />
             </View>
             <Text style = {styles.name}>{name}</Text>
             <Text style = {styles.description}>{description}</Text>

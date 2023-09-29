@@ -91,8 +91,8 @@ const TaxonomicSubCategory = ({navigation, route}) => {
             <FlatList data = {subCategories}
                 renderItem = {({item}) => 
                     <TouchableOpacity style = {styles.button} onPress = {() => handlePressSubCategory(item)}>
-                        <TouchableOpacity style = {styles.imageContainer} onLongPress = {() => navigation.navigate('TaxonomicIconInformation', {id: item._id, name: item.name, description: item.description})}>
-                            <Image source = {ICONS[0]} style = {styles.image} />
+                        <TouchableOpacity style = {styles.imageContainer} onLongPress = {() => navigation.navigate('TaxonomicIconInformation', {image: ICONS['attribute_category'][item._id], name: item.name, description: item.description})}>
+                            <Image source = {ICONS['attribute_category'][item._id]} style = {styles.image} />
                         </TouchableOpacity>
                         <Text style = {styles.buttonText}>{item.name}</Text>
                         <View style = {styles.spaceFiller} />

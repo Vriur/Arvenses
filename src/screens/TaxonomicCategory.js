@@ -91,7 +91,7 @@ const TaxonomicCategory = ({navigation}) => {
                     renderItem = {({item}) => 
                         <TouchableOpacity style = {styles.button} onPress = {() => navigation.navigate('TaxonomicSubCategory', {path: {categoryId: item._id, categoryName: item.value}})}>
                             <View style = {styles.imageContainer}>
-                                <Image source = {ICONS[0]} style = {styles.image} />
+                                <Image source = {ICONS['specie_category'][item._id]} style = {styles.image} />
                             </View>
                             <Text style = {styles.buttonText}>{item.value}</Text>
                             <View style = {styles.spaceFiller} />
