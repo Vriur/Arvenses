@@ -110,8 +110,7 @@ const TaxonomicAttributes = ({navigation, route}) => {
                     FROM attribute_category AS ac
                     JOIN attribute AS a
                     ON ac._id = a.attribute_category_id
-                    WHERE ac.specie_category_id = ?
-                    AND ac.category_main_id = ?`, [path.categoryId, path.subCategoryId],
+                    WHERE ac.category_main_id = ?`, [path.subCategoryId],
                     (query, resultSet) => {
                         let attributes = groupObject(resultSet.rows._array);
                         setAttributes(attributes);

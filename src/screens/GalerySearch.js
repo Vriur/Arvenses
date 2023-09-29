@@ -46,7 +46,7 @@ const GalerySearch = ({navigation}) => {
         async function fetchData(){
             let database = await openDatabase();
             database.transaction((query) => {
-                query.executeSql('SELECT _id, scientific_name FROM specie', [],
+                query.executeSql('SELECT _id, scientific_name FROM specie ORDER BY family_id ASC, scientific_name ASC', [],
                     (query, resultSet) => {
                         let results = [];
                         resultSet.rows._array.forEach(item => {

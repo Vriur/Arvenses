@@ -14,7 +14,7 @@ export const IMAGES = {
     37: [require(`${IMAGES_PATH}37/37_01.jpg`), require(`${IMAGES_PATH}37/37_02.jpg`)],
     38: [require(`${IMAGES_PATH}38/38_01.jpg`), require(`${IMAGES_PATH}38/38_02.jpg`), require(`${IMAGES_PATH}38/38_03.jpg`)],
     39: [require(`${IMAGES_PATH}39/39_01.jpg`), require(`${IMAGES_PATH}39/39_02.jpg`), require(`${IMAGES_PATH}39/39_03.jpg`)],
-    41: [require(`${IMAGES_PATH}42/42_01.jpg`), require(`${IMAGES_PATH}42/42_02.jpg`), require(`${IMAGES_PATH}42/42_03.jpg`), require(`${IMAGES_PATH}42/42_04.jpg`)],
+    41: [require(`${IMAGES_PATH}41/41_01.jpg`), require(`${IMAGES_PATH}41/41_02.jpg`), require(`${IMAGES_PATH}41/41_03.jpg`)],
     43: [require(`${IMAGES_PATH}43/43_01.jpg`), require(`${IMAGES_PATH}43/43_02.jpg`), require(`${IMAGES_PATH}43/43_03.jpg`)],
     46: [require(`${IMAGES_PATH}46/46_01.jpg`), require(`${IMAGES_PATH}46/46_02.jpg`), require(`${IMAGES_PATH}46/46_03.jpg`)],
     47: [require(`${IMAGES_PATH}47/47_01.jpg`), require(`${IMAGES_PATH}47/47_02.jpg`)],

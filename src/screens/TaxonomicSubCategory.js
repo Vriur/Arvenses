@@ -64,8 +64,8 @@ const TaxonomicSubCategory = ({navigation, route}) => {
                 query.executeSql(
                     `SELECT _id, category_value AS name, description
                     FROM attribute_category 
-                    WHERE specie_category_id = ?
-                    AND category_main_id IS NULL`, [path.categoryId],
+                    WHERE (specie_category_id = ? AND category_main_id IS NULL)    
+                    OR category_main_id = ?`, [path.categoryId, path.categoryId],
                     (query, resultSet) => {
                         setSubCategories(resultSet.rows._array);
                     },
@@ -77,14 +77,19 @@ const TaxonomicSubCategory = ({navigation, route}) => {
     }, [path.categoryId]);
 
     const handlePressSubCategory = (item) => {
-        if(item._id !== TAXONOMIC_FLOWER_ID){
-            navigation.navigate('TaxonomicAttributes', {path: {...path, subCategoryId: item._id, subCategoryName: item.name}});
-        }
-        else{
-            navigation.navigate('TaxonomicFlowerCategories', {path: {...path, subCategoryId: item._id, subCategoryName: item.name}, item: item});
+        switch (item._id ) {
+            case 50:
+            case 51: 
+                navigation.push('TaxonomicSubCategory', {path: {...path, categoryId: item._id, categoryName: `${path.categoryName}/ ${item.name}`}})
+                break;
+            case TAXONOMIC_FLOWER_ID:
+                navigation.navigate('TaxonomicFlowerCategories', {path: {...path, subCategoryId: item._id, subCategoryName: item.name}, item: item});
+                break;
+            default:     
+                navigation.navigate('TaxonomicAttributes', {path: {...path, subCategoryId: item._id, subCategoryName: item.name}});
         }
     }
-
+    
     return(
         <View style = {styles.container}>
             <Text style = {styles.path}>{`${path.categoryName}/`}</Text>
