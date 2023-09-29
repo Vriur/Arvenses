@@ -22,7 +22,7 @@ const ResultImages = (initialParams) => {
 
     return(
         <View style = {styles.container}>
-            <FlatList data = {IMAGES[id % 2]} showsVerticalScrollIndicator={false} showsHorizontalScrollIndicator={false}
+            <FlatList data = {IMAGES[id]} showsVerticalScrollIndicator={false} showsHorizontalScrollIndicator={false}
                 renderItem = {({item}) => 
                     <ImageModal
                         source = {item}

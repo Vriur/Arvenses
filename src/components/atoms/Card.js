@@ -63,7 +63,7 @@ const Card = (props) => {
     return(
         <TouchableOpacity style = {styles.container} onPress={() => props.navigation.navigate('ResultMenu', {itemData: cardData})}>
             <View style = {styles.imageContainer}>
-                <Image source = {IMAGES[cardData.id % 2][0]} style = {styles.image} />
+                <Image source = {IMAGES[cardData.id][0]} style = {styles.image} />
             </View>
             <View style = {styles.textData}>
                 <Text style = {styles.name}>
