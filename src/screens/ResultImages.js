@@ -8,12 +8,18 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         overflow: 'hidden',
-        marginVertical: '2%'
+    },
+
+    imageContainer: {
+        marginHorizontal: '1%',
+        marginVertical: '1%',
+        borderColor: '#41ade7',
+        borderWidth: 1,
     },
 
     image: {
-        margin: '2%',
-        width: 0.9 * Dimensions.get('window').width,
+        height: 200,
+        width: (0.94 * Dimensions.get('window').width) / 2,
     },
 });
 
@@ -23,15 +29,18 @@ const ResultImages = (initialParams) => {
     return(
         <View style = {styles.container}>
             <FlatList data = {IMAGES[id]} showsVerticalScrollIndicator={false} showsHorizontalScrollIndicator={false}
-                renderItem = {({item}) => 
-                    <ImageModal
-                        source = {item}
-                        swipeToDismiss = {true}
-                        resizeMode = 'contain'
-                        imageBackgroundColor = 'white'
-                        style={styles.image}  
-                    />
+                renderItem = {({item}) =>
+                    <View style = {styles.imageContainer}> 
+                        <ImageModal
+                            source = {item}
+                            swipeToDismiss = {true}
+                            imageBackgroundColor = {'#E5E4E2'}
+                            resizeMode = 'contain'
+                            style = {styles.image}  
+                        />
+                    </View>
                 }
+                numColumns={2}
             />
         </View>
     );
