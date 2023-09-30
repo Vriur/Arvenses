@@ -7,6 +7,7 @@ import TaxonomyIconInformation from '../screens/TaxonomicIconInformation';
 import TaxonomyMissingInformation from '../screens/TaxonomicMissingInformation';
 import TaxonomicMarks from '../screens/TaxonomicMarks';
 import TaxonomyFlowerCategories from '../screens/TaxonomyFlowerCategories';
+import TaxonomicResults from '../screens/TaxonomicResults';
 
 const TaxonomyStack = createNativeStackNavigator();
 
@@ -20,6 +21,7 @@ const NavigationTaxonomyStack = () => {
       <TaxonomyStack.Screen name = 'TaxonomicIconInformation' component = {TaxonomyIconInformation} />
       <TaxonomyStack.Screen name = 'TaxonomicMissingInformation' component = {TaxonomyMissingInformation} />
       <TaxonomyStack.Screen name = 'TaxonomicMarks' component = {TaxonomicMarks} />
+      <TaxonomyStack.Screen name = 'TaxonomicResults' component = {TaxonomicResults} />
     </TaxonomyStack.Navigator>
   );
 };

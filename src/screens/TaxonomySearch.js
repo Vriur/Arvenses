@@ -15,9 +15,7 @@ const TaxonomySearch = ({navigation}) => {
     return(
         <View style = {styles.container}>
             <Provider store = {store}>
-                <NavigationContainer independent = {true}>
-                    <TaxonomyStack />
-                </NavigationContainer>
+                <TaxonomyStack />
             </Provider>
         </View>
     );
