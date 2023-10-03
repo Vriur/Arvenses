@@ -31,7 +31,7 @@ export const MAIN_BAR = {
 export const HOME = {
     BUTTON_TEXT: 'ENTRAR',
     MODAL_TITLE: 'ADVERTENCIA',
-    MODAL_TEXT: 'La información sobre manejo acá se incluye de buena fe, con base en la información publicada. NO constituye recomendación, NI preferencia de los autores o la Universidad de Costa Rica.',
+    MODAL_TEXT: 'La información sobre manejo acá se incluye de buena fe. Los autores o la Universidad de Costa Rica no asumen ni se responsabilizan por el uso y sus consecuencias a partir de la información suministrada.',
     MODAL_BUTTON_TEXT: 'Entendido'
 };
 
@@ -59,12 +59,12 @@ export const HELP = {
     WELCOME: 'Bienvenidos a arvenses de pastos',
     MAIN_TEXT: 'Cuando abra la app, oprima entrar. Se desplegará una pantalla con tres columnas. A la izquierda la galería con todas las fotos de las arvenses. En el centro la columna titulada Taxonomía. A la derecha se muestra la sección de información adicional.',
     GALERY_TITLE: 'Galería:',
-    GALERY_TEXT: '\n\u2022 Use la galería como una guía convencional ilustrada. \n\n\u2022 Desplácese hacia arriba y hacia abajo de la lista de las especies. En la parte inferior de la pantalla verá el botón buscar. Introduzca un nombre, o parte de este, para buscar una especie determinada; si no aparece, no se incluyó en esta versión.',
+    GALERY_TEXT: '\n\u2022 Use la galería como una guía convencional ilustrada. \n\n\u2022 Desplácese hacia arriba y hacia abajo de la lista de las especies. En la parte superior de la pantalla verá el botón buscar. Introduzca un nombre, o parte de este, para buscar una especie determinada; si no aparece, no se incluyó en esta versión.',
     TAXONOMY_TITLE: 'Taxonomía:',
     TAXONOMY_WARNING: '¡Recuerde que cuando cambie de hoja ancha a hoja angosta debe limpiar las marcas!',
     TAXONOMY_TEXT: '\n\u2022 Use la columna de taxonomía para identificar una especie desconocida. De los atributos que se despliegan, recuerde que no tiene que seleccionarlos TODOS, sólo los que usted requiera. Empiece por el menú general. \n\n\u2022 Una vez se despliega un menú, se puede desplegar los submenús asociados. Si mantiene oprimido un ícono de menú o submenú, se despliegan definiciones sobre estos. \n\n\u2022 Cuando se oprime un atributo, se marca el mismo y se reduce el número de especies en la base de datos, cuando el número de especies restantes sea bajo, por ejemplo 4, oprima coincidencias, para desplegar las fotos. \n\n\u2022 Si oprime de nuevo un atributo, se borrará la respectiva marca, esto es útil, cuando se escogen por error. \n\n\u2022 En el botón “+”, en la parte inferior de la pantalla puede revisar los ítems seleccionados, o limpiar las marcas e iniciar de nuevo.',
     MATCHING_OPTIONS_TITLE: 'Opción de coincidencias:',
-    MATCHING_OPTIONS_TEXT: '\n Si los atributos que usted ha escogido reducen el número de especies remanentes a un número pequeño, y su arvense desconocida no está entre ellas, hay tres posibles razones: \n\n\t\t1. La especie no está en la base de datos. Se ha hecho un importante esfuerzo para incluir tantas arvenses de pastos cómo fue posible, pero con los años será necesario seguir añadiendo especies. \n\n\t\t2. Hay un error en los datos. Esto es posible, si descubre algún error, por favor contactar a arvenses.eeafbm@ucr.ac.cr \n\n\t\t3. Usted escogió un atributo incorrecto. Por favor vaya a menú "ítem seleccionados", para revisar las marcas que ha hecho. Puede revisar, eliminar o cambiar cualquiera de las marcas que ha hecho, directamente en esa pantalla.',
+    MATCHING_OPTIONS_TEXT: '\n Si los atributos que usted ha escogido reducen el número de especies remanentes a un número pequeño, y su arvense desconocida no está entre ellas, hay tres posibles razones: \n\n\t\t1. La especie no está en la base de datos. Se ha hecho un importante esfuerzo para incluir tantas arvenses de pastos cómo fue posible, pero con los años será necesario seguir añadiendo especies. \n\n\t\t2. Hay un error en los datos. Esto es posible, si descubre algún error, por favor contactar a arvenses.eeafbm@ucr.ac.cr \n\n\t\t3. Usted escogió un atributo incorrecto. Por favor vaya al menú de marcas, para revisar las marcas que ha hecho. Puede revisar, eliminar o cambiar cualquiera de las marcas que ha hecho, directamente en esa pantalla.',
 };
 
 /**
@@ -149,7 +149,7 @@ export const CONTACT_PREFIX = {
 
 /* Constantes correspondientes al texto mostrado en la barra de acciones taxonómicas. */
 export const TAXONOMY_ACTION_BAR_TEXT = {
-    MATCHES: 'Resultados: ',
+    MATCHES: 'Coincidencias: ',
     MARKS: 'Marcas'
 } 
 

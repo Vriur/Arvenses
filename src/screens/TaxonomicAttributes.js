@@ -204,11 +204,8 @@ const TaxonomicAttributes = ({navigation, route}) => {
                                                             onPress = {(isChecked) => {
                                                                 handleCheckOption(isChecked,
                                                                     {
-                                                                        categoryId: path.categoryId,
-                                                                        subCategoryId: path.subCategoryId,
-                                                                        attributeId: item,
-                                                                        optionId: option['attribute_option_id'],
-                                                                        route: `${path.categoryName}/ ${path.subCategoryName} / ${attributes[item]['attribute_name']}: ${option['attribute_option_name']}`
+                                                                        attributeId: option['attribute_option_id'],
+                                                                        route: `${path.categoryName}/ ${path.subCategoryName}/ ${attributes[item]['attribute_name']}: ${option['attribute_option_name']}`
                                                                     })
                                                                 isChecked = !isChecked}} 
                                                         />

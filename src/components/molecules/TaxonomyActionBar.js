@@ -36,29 +36,23 @@ const styles = StyleSheet.create({
 });
 
 const TaxonomyActionBar = ({navigation, showBack = true}) => {
+    const [filterlessData, setFilterlessData] = useState([]);
     const [data, setData] = useState([]);
     const [dataQuantity, setDataQuantity] = useState(0);
-    const selectedOptions = useSelector((state) => state.taxonomicOptions);
+    const selectedAttributes = useSelector((state) => state.taxonomicOptions);
     let areResults = !!useSelector((state) => state.taxonomicOptions).length;
 
     useEffect(() => {
         async function fetchData(){
             let database = await openDatabase();
             database.transaction((query) => {
-                query.executeSql('SELECT _id, scientific_name FROM specie ORDER BY family_id ASC, scientific_name ASC', [],
+                query.executeSql(
+                    `SELECT s._id, s.scientific_name, sam.attribute_id 
+                    FROM specie AS s, specie_attribute_mid AS sam 
+                    WHERE s._id = sam.specie_id`, [],
                     (query, resultSet) => {
-                        let results = [];
-                        resultSet.rows._array.forEach(item => {
-                            /* Se separa el valor almacenado en la base de datos en el nombre de la planta y el 
-                            nombre del autor, esto con fin de que el nombre de la planta se muestre en itálica. */  
-                            let name = item.scientific_name.split(' ');
-                            let scientificName = name.slice(0, 2).join(' ')  + ' ';
-                            let authors = name.slice(2).join(' ');
-                            let result = {id: item._id, scientificName: scientificName, authors: authors};
-                            results.push(result);
-                        });
-                        setData(results);
-                        setDataQuantity(results.length);
+                        setFilterlessData(resultSet.rows._array);
+                        updateData(resultSet.rows._array);
                     },
                     (query, error) => {console.log(error)}
                 )
@@ -66,6 +60,46 @@ const TaxonomyActionBar = ({navigation, showBack = true}) => {
         } 
         fetchData();
     }, []);
+
+    useEffect(() => {
+        updateData(filterlessData);
+    }, [selectedAttributes]);
+
+    const updateData = (filterlessData) => {
+        let filteredData = getFilteredResultSet(filterlessData);
+        setDataQuantity(filteredData.length);
+        setData(filteredData);
+    }
+
+    const getFilteredResultSet = (resultSet) => {
+        let reduceResultSet = resultSet.reduce((accumulator, item) => {
+            accumulator[item._id] = accumulator[item._id] || {scientificName: item.scientific_name, attributes: []};
+            accumulator[item._id]['attributes'].push(item.attribute_id);
+            return accumulator;
+        }, {});
+        
+        selectedAttributes.forEach(attribute => {
+            Object.keys(reduceResultSet).forEach(specieId => {
+                if(!reduceResultSet[specieId]['attributes'].includes(attribute.attributeId)){
+                    delete reduceResultSet[specieId];
+                }
+            })
+        });
+        
+        let filteredSpecies = [];
+        Object.keys(reduceResultSet).forEach(specieId => {
+            /* Se separa el valor almacenado en la base de datos en el nombre de la planta y el 
+            nombre del autor, esto con fin de que el nombre de la planta se muestre en itálica. */  
+            let name = reduceResultSet[specieId]['scientificName'].split(' ');
+            let scientificName = name.slice(0, 2).join(' ')  + ' ';
+            let authors = name.slice(2).join(' ');
+            let specie = {id: specieId, scientificName: scientificName, authors: authors};
+            filteredSpecies.push(specie);
+        });
+        
+        return filteredSpecies;
+        return [];
+    }
 
     return(
         <View style = {styles.actionButtonsContainer}>
