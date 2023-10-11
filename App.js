@@ -6,7 +6,8 @@ import NavigationStack from './src/navegation/NavegationStack';
 import { initDatabase } from './database-service';
 
 function App() {
-  initDatabase();
+  /* Este código solo se usa cuando se cambia la base de datos constantemente pues borra el archivo guardado. */
+  //initDatabase();
   
   return (
     <SafeAreaProvider>

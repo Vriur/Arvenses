@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Image, ImageBackground, Modal, StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { APP, HOME } from '../../Constants';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import BackgroundImg from './../assets/app_images/img_inicio.jpg';
 import FabioIcon from './../assets/app_images/fabio_icon.png';
 import UCRIcon from './../assets/app_images/ucr_icon.png';
@@ -9,7 +9,7 @@ import UCRIcon from './../assets/app_images/ucr_icon.png';
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: '#174c72',
         alignItems: 'center',
         justifyContent: 'center',
     },
