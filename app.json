@@ -2,7 +2,7 @@
   "expo": {
     "name": "Caféarvenses",
     "slug": "arvenses",
-    "version": "1.0.0",
+    "version": "1.3.0",
     "orientation": "portrait",
     "icon": "./src/assets/app_images/app_icon_black.png",
     "userInterfaceStyle": "light",
@@ -21,8 +21,7 @@
         "backgroundColor": "#FFFFFF"
       },
       "softwareKeyboardLayoutMode": "pan",
-      "package": "com.vriur04.arvenses",
-      "permissions": ["STATUS_BAR", "INTERNET", "MANAGE_EXTERNAL_STORAGE", "WRITE_EXTERNAL_STORAGE"]
+      "package": "com.vriur04.arvenses"
     },
     "web": {
       "favicon": "./src/assets/app_images/app_icon_black.png"
@@ -32,6 +31,6 @@
         "projectId": "d74d4492-ef3e-47b2-a6ba-401776dbd900"
       }
     },
-    "owner": "vriur04"
+    "owner": "apps-arvenses"
   }
 }
