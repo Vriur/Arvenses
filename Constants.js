@@ -52,6 +52,8 @@ export const ABOUT_US = {
         PREFIX: 'WEB'
     },
     PROJECT_INFO: 'Proyecto de Acción Social ED-1816, Universidad de Costa Rica',
+    PRIVACY_POLICIES: 'Políticas de privacidad:',
+    PRIVACY_POLICIES_LINK: 'https://arvenses-eeafbm.ucr.ac.cr/index.php/es/politicas-de-privacidad'
 };
 
 /* Constantes correspondientes al texto mostrado en la pantalla de ayuda. */

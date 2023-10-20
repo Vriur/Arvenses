@@ -7,7 +7,7 @@ import { initDatabase } from './database-service';
 
 function App() {
   /* Este código solo se usa cuando se cambia la base de datos constantemente pues borra el archivo guardado. */
-  //initDatabase();
+  initDatabase();
   
   return (
     <SafeAreaProvider>
