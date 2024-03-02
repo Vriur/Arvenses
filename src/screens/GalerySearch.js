@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, TextInput, View } from 'react-native';
-import { openDatabase } from '../../database-service';
+import { database } from '../../database-service';
 import { GALERY_SEARCH } from '../../Constants';
 import CardList from '../components/molecules/CardList';
 import { AntDesign } from '@expo/vector-icons';
@@ -41,21 +41,33 @@ const GalerySearch = ({navigation}) => {
     const [filterData, setFilterData] = useState([]);
     const [dataQuantity, setDataQuantity] = useState(0);
     const [searchText, setSearchText] = useState('');
-    
+
     useEffect(() => {
         async function fetchData(){
-            let database = await openDatabase();
             database.transaction((query) => {
-                query.executeSql('SELECT _id, scientific_name FROM specie ORDER BY family_id ASC, scientific_name ASC', [],
+                query.executeSql(
+                    `SELECT s._id, s.scientific_name, f.family_value, g.gender_value, sc.value 
+                    FROM family AS f, gender AS g, specie AS s, specie_category AS sc 
+                    WHERE s.family_id = f._id 
+                    AND s.gender_id = g._id 
+                    AND s.specie_category_id = sc._id
+                    ORDER BY family_id ASC, scientific_name ASC`, [],
                     (query, resultSet) => {
                         let results = [];
                         resultSet.rows._array.forEach(item => {
                             /* Se separa el valor almacenado en la base de datos en el nombre de la planta y el 
-                               nombre del autor, esto con fin de que el nombre de la planta se muestre en itálica. */ 
+                                nombre del autor, esto con fin de que el nombre de la planta se muestre en itálica. */ 
                             let name = item.scientific_name.split(' ');
                             let scientificName = name.slice(0, 2).join(' ')  + ' ';
                             let authors = name.slice(2).join(' ');
-                            let result = {id: item._id, scientificName: scientificName, authors: authors};
+                            let result = {
+                                id: item._id, 
+                                scientificName: scientificName, 
+                                authors: authors,
+                                family: item.family_value,
+                                gender: item.gender_value,
+                                category: item.value,
+                            };
                             results.push(result);
                         });
                         setData(results);
@@ -72,7 +84,7 @@ const GalerySearch = ({navigation}) => {
     useEffect(() => {
         let filteredResults = data.filter((item) => {
             let itemName = item.scientificName + ' ' + item.authors;
-            return itemName.includes(searchText);
+            return itemName.includes(searchText) || item.family.includes(searchText) || item.gender.includes(searchText);
         })
         setFilterData(filteredResults);
         setDataQuantity(filteredResults.length);

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { openDatabase } from '../../database-service';
+import { database } from '../../database-service';
 import { AntDesign } from '@expo/vector-icons';
 import { TAXONOMY_SEARCH_WARNING } from './../../Constants';
 import { ICONS } from './../assets/requireFiles/icons';
@@ -65,12 +65,11 @@ const styles = StyleSheet.create({
 
 const TaxonomicCategory = ({navigation}) => {
     const [categories, setCategories] = useState([]);
-    
+
     useEffect(() => {
         async function fetchData(){
-            let database = await openDatabase();
             database.transaction((query) => {
-                query.executeSql("SELECT _id, value FROM specie_category", [],
+                query.executeSql(`SELECT _id, value FROM specie_category`, [],
                     (query, resultSet) => {
                         setCategories(resultSet.rows._array);
                     },

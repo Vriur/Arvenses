@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { ATTRIBUTES } from './../../Constants';
-import { openDatabase } from './../../database-service';
+import { database } from './../../database-service';
 
 const styles = StyleSheet.create({
     container: {
@@ -43,36 +43,13 @@ const ResultAttributes = (initialParams) => {
 
     useEffect(() => {
         async function fetchData(){
-            let database = await openDatabase();
-
-            // En esta consulta traemos la información restante del arvense como lo es la familia, genero y categoría.
-            database.transaction((query) => {
-                query.executeSql(
-                    `SELECT f.family_value, g.gender_value, sc.value 
-                    FROM family AS f, gender AS g, specie AS s, specie_category AS sc 
-                    WHERE s._id = ? 
-                    AND s.family_id = f._id 
-                    AND s.gender_id = g._id 
-                    AND s.specie_category_id = sc._id`, [itemData.id],
-                    (query, resultSet) => {
-                        setItemData({
-                            ...itemData, 
-                            family: resultSet.rows._array[0].family_value,
-                            gender: resultSet.rows._array[0].gender_value,
-                            category: resultSet.rows._array[0].value,
-                        });
-                    },
-                    (query, error) => {console.log(error)}
-                )
-            });
-
             /* En esta consulta se traen todos los atributos correspondientes al arvense. 
                Se decidio hacer en dos consultas por separado por dos razones. La primera es que la base
                no es tan grande, por lo que hacer dos consultas no comprende un costo computacional excesivo.
                La segunda razón es que de esta manera podemos concentrarnos en los joins correspondientes a los
                atributos en esta segunda consulta sin hacer duplicados ineccesarios de las columnas de la primera
                consulta.*/
-               database.transaction((query) => {
+            database.transaction((query) => {
                 query.executeSql(
                     `SELECT a.attribute_name AS attribute, ac.category_value AS value, ac2.category_value AS value2
                     FROM specie AS s 

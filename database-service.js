@@ -16,6 +16,8 @@ export async function initDatabase() {
     }
 }
 
-export async function openDatabase() {
-    return SQLite.openDatabase('arvenses_db.db');
+export function openDatabase() {
+    
 }
+
+export const database = SQLite.openDatabase('arvenses_db.db');

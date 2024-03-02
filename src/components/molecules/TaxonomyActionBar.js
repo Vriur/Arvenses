@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import { GO_BACK, TAXONOMY_ACTION_BAR_TEXT } from './../../../Constants';
-import { openDatabase } from '../../../database-service';
+import { database } from '../../../database-service';
 
 const styles = StyleSheet.create({
     actionButtonsContainer: {
@@ -44,12 +44,15 @@ const TaxonomyActionBar = ({navigation, showBack = true}) => {
 
     useEffect(() => {
         async function fetchData(){
-            let database = await openDatabase();
             database.transaction((query) => {
                 query.executeSql(
-                    `SELECT s._id, s.scientific_name, sam.attribute_id 
-                    FROM specie AS s, specie_attribute_mid AS sam 
-                    WHERE s._id = sam.specie_id`, [],
+                    `SELECT s._id, s.scientific_name, f.family_value, g.gender_value, sam.attribute_id, sc.value
+                    FROM family AS f, gender AS g, specie AS s, specie_attribute_mid AS sam, specie_category AS sc 
+                    WHERE s.family_id = f._id 
+                    AND s.gender_id = g._id 
+                    AND s.specie_category_id = sc._id
+                    AND s._id = sam.specie_id
+                    ORDER BY family_id ASC, scientific_name ASC`, [],
                     (query, resultSet) => {
                         setFilterlessData(resultSet.rows._array);
                         updateData(resultSet.rows._array);
@@ -73,7 +76,7 @@ const TaxonomyActionBar = ({navigation, showBack = true}) => {
 
     const getFilteredResultSet = (resultSet) => {
         let reduceResultSet = resultSet.reduce((accumulator, item) => {
-            accumulator[item._id] = accumulator[item._id] || {scientificName: item.scientific_name, attributes: []};
+            accumulator[item._id] = accumulator[item._id] || {scientificName: item.scientific_name, family: item.family_value, gender: item.gender_value, category: item.value, attributes: []};
             accumulator[item._id]['attributes'].push(item.attribute_id);
             return accumulator;
         }, {});
@@ -93,7 +96,14 @@ const TaxonomyActionBar = ({navigation, showBack = true}) => {
             let name = reduceResultSet[specieId]['scientificName'].split(' ');
             let scientificName = name.slice(0, 2).join(' ')  + ' ';
             let authors = name.slice(2).join(' ');
-            let specie = {id: specieId, scientificName: scientificName, authors: authors};
+            let specie = {
+                id: specieId, 
+                scientificName: scientificName, 
+                authors: authors,
+                family: reduceResultSet[specieId]['family'],
+                gender: reduceResultSet[specieId]['gender'],
+                category: reduceResultSet[specieId]['category'],
+            };
             filteredSpecies.push(specie);
         });
         

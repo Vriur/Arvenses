@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { openDatabase } from '../../database-service';
+import { database } from '../../database-service';
 import { AntDesign } from '@expo/vector-icons';
 import { ICONS } from './../assets/requireFiles/icons';
 import BouncyCheckbox from "react-native-bouncy-checkbox";
@@ -103,7 +103,6 @@ const TaxonomicAttributes = ({navigation, route}) => {
     
     useEffect(() => {
         async function fetchData(){
-            let database = await openDatabase();
             database.transaction((query) => {
                 query.executeSql(
                     `SELECT ac._id AS attribute_id, ac.category_value AS attribute_name, ac.description AS attribute_description, a._id AS attribute_option_id, a.attribute_name AS attribute_option_name, a.description AS attribute_option_description

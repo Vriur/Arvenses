@@ -12,8 +12,13 @@
     "assetBundlePatterns": [
       "**/*"
     ],
+    "splash": {
+      "image": "./src/assets/app_images/app_icon_white.png",
+      "backgroundColor": "#FFFFFF"
+    },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.vriur04.arvenses"
     },
     "android": {
       "adaptiveIcon": {
@@ -31,6 +36,9 @@
         "projectId": "d74d4492-ef3e-47b2-a6ba-401776dbd900"
       }
     },
-    "owner": "apps-arvenses"
+    "owner": "apps-arvenses",
+    "plugins": [
+      "expo-build-properties"
+    ]
   }
 }

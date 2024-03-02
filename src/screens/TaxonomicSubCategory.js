@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { openDatabase } from '../../database-service';
+import { database } from '../../database-service';
 import { AntDesign } from '@expo/vector-icons';
 import { TAXONOMIC_FLOWER_ID } from '../../Constants';
 import { ICONS } from '../assets/requireFiles/icons';
@@ -59,7 +59,6 @@ const TaxonomicSubCategory = ({navigation, route}) => {
     
     useEffect(() => {
         async function fetchData(){
-            let database = await openDatabase();
             database.transaction((query) => {
                 query.executeSql(
                     `SELECT _id, category_value AS name, description
